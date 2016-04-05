@@ -17,7 +17,7 @@ public class DBConnectionUtils {
     static final String DRIVER = "com.mysql.jdbc.Driver";
     static final String URL = "jdbc:mysql://localhost:3306/dao";
     static final String LOGIN = "root";
-    static final String PASS = "1234";
+    static final String PASS = "1";
 
     public static Connection createConnection(){
         try {

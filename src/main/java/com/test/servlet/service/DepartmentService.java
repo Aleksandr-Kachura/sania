@@ -8,4 +8,5 @@ public interface DepartmentService {
 
     List<Department> findAll();
 
+    void add(Department dep);
 }

@@ -23,23 +23,14 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
     public void add(Department model) {
-        String SQL = "insert into department (name) values (?)";
-
-        try (Connection con = DBConnectionUtils.createConnection()){
-
-
-            try (PreparedStatement statement = con != null ? con.prepareStatement(SQL) : null){
-                log.trace("Create prepared statement");
-                statement.setString(1,model.getName());
-                statement.executeUpdate();
-            }catch (SQLException e){
-                log.error("Statement ADD COMMAND exception",e);
-            }catch (NullPointerException e){
-                log.error("CON is null",e);
-            }
-
-        } catch (SQLException e) {
-            log.error("Connect exception in ADD COMMAND", e);
+        Connection connection = DBConnectionUtils.createConnection();
+        try {
+            String SQL = "insert into department (name) values (?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, model.getName());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
 
     }

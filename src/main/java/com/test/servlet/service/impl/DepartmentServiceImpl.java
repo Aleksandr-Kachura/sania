@@ -21,11 +21,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
 
-    public void add()
-    {
-        Department model = new Department();
-        model.setName("dsds");
-        departmentDao.add(model);
+    public void add (Department dep) {
+        departmentDao.add(dep);
     }
 
 }
