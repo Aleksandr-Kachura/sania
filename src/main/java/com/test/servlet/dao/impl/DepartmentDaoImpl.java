@@ -6,6 +6,7 @@ import com.test.servlet.util.DBConnectionUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,15 +23,23 @@ public class DepartmentDaoImpl implements DepartmentDao{
     }
 
     public void add(Department model) {
-        String SQL = "insert into client (name) values (?)";
-        //Connection connection = DBConnectionUtils.createConnection();
-       /// state = dbConnection.createStatement();
-        try (Connection connection = DBConnectionUtils.createConnection()) {
+        String SQL = "insert into department (name) values (?)";
 
-            // code to execute SQL queries goes here...
+        try (Connection con = DBConnectionUtils.createConnection()){
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+
+            try (PreparedStatement statement = con != null ? con.prepareStatement(SQL) : null){
+                log.trace("Create prepared statement");
+                statement.setString(1,model.getName());
+                statement.executeUpdate();
+            }catch (SQLException e){
+                log.error("Statement ADD COMMAND exception",e);
+            }catch (NullPointerException e){
+                log.error("CON is null",e);
+            }
+
+        } catch (SQLException e) {
+            log.error("Connect exception in ADD COMMAND", e);
         }
 
     }

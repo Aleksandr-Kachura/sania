@@ -1,5 +1,8 @@
 package com.test.servlet.controller;
 
+import com.test.servlet.dao.impl.DepartmentDaoImpl;
+import com.test.servlet.service.impl.DepartmentServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,8 @@ public class MainServlet extends HttpServlet {
        String str = req.getRequestURI();
         if (str.equals("/add")) {
 
+            DepartmentServiceImpl depart = new DepartmentServiceImpl();
+            depart.add();
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
         if (str.equals("/edit")) {

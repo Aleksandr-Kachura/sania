@@ -10,5 +10,6 @@ import java.util.List;
 public interface DepartmentDao {
 
     List<Department> findAll();
+    void add(Department model);
 
 }

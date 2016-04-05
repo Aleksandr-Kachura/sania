@@ -3,6 +3,7 @@ package com.test.servlet.service.impl;
 import com.test.servlet.dao.DepartmentDao;
 import com.test.servlet.dao.impl.DepartmentDaoImpl;
 import com.test.servlet.model.Department;
+
 import com.test.servlet.service.DepartmentService;
 
 import java.util.List;
@@ -17,6 +18,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     public List<Department> findAll() {
         return departmentDao.findAll();
+    }
+
+
+    public void add()
+    {
+        Department model = new Department();
+        model.setName("dsds");
+        departmentDao.add(model);
     }
 
 }
