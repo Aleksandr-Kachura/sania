@@ -8,9 +8,7 @@ import com.test.servlet.service.DepartmentService;
 
 import java.util.List;
 
-/**
- * Created by user on 04.04.16.
- */
+
 public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentDao departmentDao = new DepartmentDaoImpl();
@@ -21,8 +19,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
 
+    public Department findDepartmentById(int id) {
+        return departmentDao.findDepartmentById(id);
+    }
+
     public void add (Department dep) {
         departmentDao.add(dep);
     }
+
+    public void delete (Department dep) {departmentDao.delete(dep); }
 
 }

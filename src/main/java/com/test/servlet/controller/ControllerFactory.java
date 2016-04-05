@@ -1,6 +1,9 @@
 package com.test.servlet.controller;
 
-import com.test.servlet.controller.dep.AddDep;
+import com.test.servlet.controller.dep.*;
+import com.test.servlet.controller.empl.*;
+
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,11 +14,14 @@ public class ControllerFactory {
 
     private InternalController defaultController = new DefController();
 
-
     {
         controllerMap.put("/", defaultController);
-        controllerMap.put("/dep", new AddDep());
-        //controllerMap.put("/showDep");
+        controllerMap.put("/addDep", new addDep());
+        controllerMap.put("/saveDep", new saveDep());
+        controllerMap.put("/showAllDep",new showAllDep());
+        controllerMap.put("/delDep",new delDep());
+        controllerMap.put("/editDep",new editDep());
+        controllerMap.put("/showAllEmpl",new showAllEmpl());
     }
 
     public InternalController getControllerByName(String name){

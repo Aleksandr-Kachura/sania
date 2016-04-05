@@ -1,28 +1,23 @@
 package com.test.servlet.controller;
 
-import com.sun.xml.internal.bind.v2.ClassFactory;
-import com.test.servlet.dao.impl.DepartmentDaoImpl;
-import com.test.servlet.model.Department;
 import com.test.servlet.service.DepartmentService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
-import com.test.servlet.util.DBConnectionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
-public class MainServlet extends HttpServlet {
+/**
+ * Created on 05.04.16.
+ */
+public class Test extends HttpServlet {
 
     private DepartmentService depServ =  new DepartmentServiceImpl() ;
 
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-       req.setCharacterEncoding("UTF-8");
 
         ControllerFactory factory = new ControllerFactory();
         InternalController contr =  factory.getControllerByName(req.getRequestURI());
@@ -40,13 +35,9 @@ public class MainServlet extends HttpServlet {
 
        /*String str = req.getRequestURI();
         if (str.equals("/add")) {
-
             Department dep = new Department();
             dep.setName("alex88");
-
-
             depServ.add(dep);
-
             // req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
         if (str.equals("/edit")) {
@@ -67,5 +58,6 @@ public class MainServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
+
 
 }
