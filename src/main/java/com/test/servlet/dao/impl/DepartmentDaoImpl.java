@@ -14,15 +14,13 @@ import java.util.List;
  */
 public class DepartmentDaoImpl implements DepartmentDao{
 
-    private Connection connection;
 
-    public DepartmentDaoImpl(){
-        connection = DBConnectionUtils.createConnection();
-    }
 
     private static Logger log = Logger.getLogger(DepartmentDaoImpl.class);
 
-    public List<Department> findAll() {
+    public List<Department> findAll() throws SQLException {
+
+        Connection connection = DBConnectionUtils.createConnection();
         List<Department> departments = new ArrayList<Department>();
         try {
             String SQL = "select * from department";
@@ -37,42 +35,19 @@ public class DepartmentDaoImpl implements DepartmentDao{
                 dep.setName(rs.getString("name"));
                 departments.add(dep);
             }
-        }catch (SQLException e) {
-            e.printStackTrace();
+        }finally {
+            connection.close();
         }
-
 
         return departments;
     }
 
-  /*  public User getUserById(int userId) {
-        User user = new User();
-        try {
-            PreparedStatement preparedStatement = connection.
-                    prepareStatement("select * from users where userid=?");
-            preparedStatement.setInt(1, userId);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                user.setUserid(rs.getInt("userid"));
-                user.setFirstName(rs.getString("firstname"));
-                user.setLastName(rs.getString("lastname"));
-                user.setDob(rs.getDate("dob"));
-                user.setEmail(rs.getString("email"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return user;
-    }*/
-
-    public Department findDepartmentById(int id)
+    public Department findDepartmentById(int id) throws SQLException
     {
+        Connection connection = DBConnectionUtils.createConnection();
         Department department = new Department();
         try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from department where id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from department where id=?");
             // Parameters start with 1
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -81,38 +56,40 @@ public class DepartmentDaoImpl implements DepartmentDao{
                 department.setName(rs.getString("name"));
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }finally {
+            connection.close();
         }
         return  department;
 
     }
 
 
-    public void delete(Department model)
+    public void delete(Department model) throws SQLException
     {
+        Connection connection = DBConnectionUtils.createConnection();
         try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from department where id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from department where id=?");
             // Parameters start with 1
             preparedStatement.setInt(1, model.getId());
             preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
 
 
-    public void add(Department model) {
+    public void add(Department model) throws SQLException {
+
+        Connection connection = DBConnectionUtils.createConnection();
         try {
             String SQL = "insert into department (name) values (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, model.getName());
             preparedStatement.executeUpdate();
-        }catch (SQLException e) {
-            e.printStackTrace();
+        }finally {
+            connection.close();
         }
 
     }

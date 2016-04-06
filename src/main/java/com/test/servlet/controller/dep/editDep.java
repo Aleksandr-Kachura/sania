@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class editDep implements InternalController {
 
@@ -17,9 +18,14 @@ public class editDep implements InternalController {
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Department dep = new Department();
-        int id = Integer.parseInt((request.getParameter("id")));
-        request.setAttribute("department", depServ.findDepartmentById(id) );
-        request.getRequestDispatcher("dep/create.jsp").forward(request, response);
+        try {
+            Department dep = new Department();
+            int id = Integer.parseInt((request.getParameter("id")));
+            request.setAttribute("department", depServ.findDepartmentById(id) );
+            request.getRequestDispatcher("dep/create.jsp").forward(request, response);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

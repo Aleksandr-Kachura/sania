@@ -1,7 +1,14 @@
 package com.test.servlet.dao;
 
-/**
- * Created by user on 04.04.16.
- */
-public interface EmployeeDao {
+
+import com.test.servlet.model.Employee;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public interface EmployeeDao{
+
+    List<Employee> findAllEmployee(int id) throws SQLException;
+
+
 }

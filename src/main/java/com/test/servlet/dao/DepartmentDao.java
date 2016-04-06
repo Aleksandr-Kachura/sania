@@ -2,16 +2,15 @@ package com.test.servlet.dao;
 
 import com.test.servlet.model.Department;
 
+import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by user on 04.04.16.
- */
+
 public interface DepartmentDao {
 
-    List<Department> findAll();
-    Department findDepartmentById(int id);
-    void add(Department model);
-    void delete(Department model);
+    List<Department> findAll() throws SQLException;
+    Department findDepartmentById(int id) throws SQLException;
+    void add(Department model) throws SQLException;
+    void delete(Department model) throws SQLException;
 
 }

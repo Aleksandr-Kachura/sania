@@ -6,6 +6,7 @@ import com.test.servlet.model.Department;
 
 import com.test.servlet.service.DepartmentService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -14,19 +15,19 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao = new DepartmentDaoImpl();
 
 
-    public List<Department> findAll() {
+    public List<Department> findAll() throws SQLException {
         return departmentDao.findAll();
     }
 
 
-    public Department findDepartmentById(int id) {
+    public Department findDepartmentById(int id) throws SQLException {
         return departmentDao.findDepartmentById(id);
     }
 
-    public void add (Department dep) {
+    public void add (Department dep) throws SQLException{
         departmentDao.add(dep);
     }
 
-    public void delete (Department dep) {departmentDao.delete(dep); }
+    public void delete (Department dep) throws SQLException{departmentDao.delete(dep); }
 
 }
