@@ -1,6 +1,7 @@
 package com.test.servlet.controller.dep;
 
 import com.test.servlet.controller.InternalController;
+import com.test.servlet.model.Department;
 import com.test.servlet.service.DepartmentService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class showAllDep implements InternalController {
@@ -19,6 +21,7 @@ public class showAllDep implements InternalController {
 
         try {
             request.setAttribute("departments", depServ.findAll() );
+          //  List<Department> list = depServ.findAll();
             request.getRequestDispatcher("dep/all.jsp").forward(request, response);
         }catch (SQLException e) {
             e.printStackTrace();

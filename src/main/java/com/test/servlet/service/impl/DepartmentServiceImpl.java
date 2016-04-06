@@ -30,4 +30,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     public void delete (Department dep) throws SQLException{departmentDao.delete(dep); }
 
+    public void update (Department dep) throws SQLException{departmentDao.update(dep); }
+
 }

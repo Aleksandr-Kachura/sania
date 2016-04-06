@@ -14,26 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-public class showAllEmpl implements InternalController {
-
+public class editEmpl implements InternalController {
 
     private EmployeeService emplServ =  new EmployeeServiceImpl() ;
 
-
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int depId = Integer.parseInt((request.getParameter("depId")));
         try {
-            request.setAttribute("depId", depId );
-            request.setAttribute("employees", emplServ.findAllEmployee(depId) );
-
+            Employee empl = new Employee();
+            int id = Integer.parseInt((request.getParameter("id")));
+            request.setAttribute("employee", emplServ.findEmployeeById(id) );
+            request.getRequestDispatcher("empl/create.jsp").forward(request, response);
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
-        request.getRequestDispatcher("empl/all.jsp").forward(request, response);
 
     }
 }

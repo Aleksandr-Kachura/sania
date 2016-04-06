@@ -22,6 +22,11 @@ public class ControllerFactory {
         controllerMap.put("/delDep",new delDep());
         controllerMap.put("/editDep",new editDep());
         controllerMap.put("/showAllEmpl",new showAllEmpl());
+        controllerMap.put("/addEmpl", new addEmpl());
+        controllerMap.put("/saveEmpl", new saveEmpl());
+        controllerMap.put("/delEmpl",new delEmpl());
+        controllerMap.put("/editEmpl",new editEmpl());
+
     }
 
     public InternalController getControllerByName(String name){

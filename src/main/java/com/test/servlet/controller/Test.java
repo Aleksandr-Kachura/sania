@@ -21,6 +21,10 @@ public class Test extends HttpServlet {
 
         ControllerFactory factory = new ControllerFactory();
         InternalController contr =  factory.getControllerByName(req.getRequestURI());
+        if( contr == null)
+        {
+            factory.getDefaultController();
+        }
         contr.doService(req, resp);
         //req.getRequestDispatcher("index2.jsp").forward(req, resp);//
        /* Connection connection = DBConnectionUtils.createConnection();

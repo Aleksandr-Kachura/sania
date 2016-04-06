@@ -12,5 +12,6 @@ public interface DepartmentDao {
     Department findDepartmentById(int id) throws SQLException;
     void add(Department model) throws SQLException;
     void delete(Department model) throws SQLException;
+    void update(Department model) throws SQLException;
 
 }

@@ -23,7 +23,15 @@ public class saveDep implements InternalController {
         try {
             Department dep = new Department();
             dep.setName(request.getParameter("name"));
-            depServ.add(dep);
+            if(request.getParameter("id").isEmpty())
+            {
+                depServ.add(dep);
+            }
+            else
+            {
+                dep.setId(Integer.valueOf(request.getParameter("id")));
+                depServ.update(dep);
+            }
         }catch (SQLException e) {
             e.printStackTrace();
         }

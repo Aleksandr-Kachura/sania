@@ -94,6 +94,21 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     }
 
+    public void update(Department model) throws SQLException {
+
+        Connection connection = DBConnectionUtils.createConnection();
+        try {
+            String SQL = "update department SET name = ? where id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, model.getName());
+            preparedStatement.setInt(2, model.getId());
+            preparedStatement.executeUpdate();
+        }finally {
+            connection.close();
+        }
+
+    }
+
 
 
 

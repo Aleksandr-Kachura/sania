@@ -21,7 +21,7 @@
     <c:forEach items="${departments}" var="dep">
         <tr>
             <td><c:out value="${dep.id}" /></td>
-            <td><a class="btn btn-lg btn-danger" href="<c:url value="/showAllEmpl?id=${dep.id}" />" role="button">${dep.name}</a></td>
+            <td><a class="btn btn-lg btn-danger" href="<c:url value="/showAllEmpl?depId=${dep.id}" />" role="button">${dep.name}</a></td>
             <td>
                 <form method="post" action="/delDep">
                     <input type="hidden" name="id" value=${dep.id}>

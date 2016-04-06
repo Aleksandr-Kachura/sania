@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Employee extends Model {
 
-    private  int departmentId;
+    private  int depId;
 
     private String firstName;
 
@@ -13,16 +13,13 @@ public class Employee extends Model {
 
     private Date birthday;
 
-    private String email;
-
-    public int getDepartmentId() {
-        return departmentId;
+    public int getDepId() {
+        return depId;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setDepId(int depId) {
+        this.depId = depId;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -46,14 +43,6 @@ public class Employee extends Model {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
 

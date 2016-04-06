@@ -11,6 +11,7 @@
     Name : <input
         type="text" name="name"
         value="<c:out value="${department.name}" />" /> <br/>
+        <input type="hidden" name="id" value="<c:out value="${department.id}" />">
         <input type="submit" value="Submit" />
 </form>
 </body>
