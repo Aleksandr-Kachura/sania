@@ -11,6 +11,10 @@
     Name : <input
         type="text" name="name"
         value="<c:out value="${department.name}" />" /> <br/>
+    <c:forEach items="${error}" var="error">
+        ${error.value} <br/>
+    </c:forEach>
+
         <input type="hidden" name="id" value="<c:out value="${department.id}" />">
         <input type="submit" value="Submit" />
 </form>

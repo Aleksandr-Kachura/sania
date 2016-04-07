@@ -1,9 +1,19 @@
 package com.test.servlet.model;
 
 
+import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.NotEmpty;
+import net.sf.oval.constraint.NotNull;
+import net.sf.oval.guard.Guarded;
+
+
+
+@Guarded
 public class Department extends Model{
 
-    private String name;
+    @NotNull
+    @NotEmpty(message = "Test Message")
+     private String name;
 
     public String getName() {
         return name;

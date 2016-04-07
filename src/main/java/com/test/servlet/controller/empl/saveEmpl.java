@@ -7,6 +7,7 @@ import com.test.servlet.model.Employee;
 import com.test.servlet.service.EmployeeService;
 
 import com.test.servlet.service.impl.EmployeeServiceImpl;
+import net.sf.oval.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,7 @@ public class saveEmpl implements InternalController {
          //   String str = request.getParameter("id");
             if(request.getParameter("id").isEmpty())
             {
+
                 empServ.add(empl);
             }
             else
