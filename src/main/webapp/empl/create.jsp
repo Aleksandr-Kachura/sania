@@ -10,7 +10,7 @@
 <form method="POST" action='saveEmpl' name="frmAddUser">
    <p>firstName :</p>  <input type="text" name="firstName" value="<c:out value="${employee.firstName}" />" /> <br/>
    <p>secondName :</p>  <input type="text" name="secondName" value="<c:out value="${employee.secondName}" />" /> <br/>
-   <p>Birthday :</p>   <input type="date" name="birthday" value="<fmt:formatDate pattern="MM/dd/yyyy" value="${employee.birthday}" />" /> <br />
+    <p>Birthday :</p> <input type="date" name="birthday" id="dateInput" placeholder="MM/DD/YYYY" value="${employee.birthday}"/><br />
    <input type="hidden" name="depId" value="<c:out value="${depId}" />" >
    <input type="hidden" name="id" value="<c:out value="${employee.id}" />">
    <input type="submit" value="Submit" />
