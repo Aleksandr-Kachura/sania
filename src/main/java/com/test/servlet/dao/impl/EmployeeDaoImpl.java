@@ -87,8 +87,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
             preparedStatement.setString(1, employee.getFirstName());
             preparedStatement.setString(2, employee.getSecondName());
             preparedStatement.setDate(3, new java.sql.Date(employee.getBirthday().getTime()));
-            preparedStatement.setDouble(4, employee.getId());
-            preparedStatement.executeQuery();
+            preparedStatement.setInt(4, employee.getId());
+            preparedStatement.executeUpdate();
 
         }finally {
             connection.close();

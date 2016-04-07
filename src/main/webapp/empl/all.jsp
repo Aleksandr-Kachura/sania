@@ -9,14 +9,14 @@
     <title>Show All Employees</title>
 </head>
 <body>
-<table border=1>
+<table border="3" >
     <thead>
     <tr>
-        <th>Empl Id</th>
-        <th>firstName</th>
-        <th>secondName</th>
-        <th>birthday</th>
-        <th colspan=2>Action</th>
+        <th bgcolor="#deb887">Empl Id</th>
+        <th bgcolor="#deb887" >firstName</th>
+        <th bgcolor="#deb887" >secondName</th>
+        <th bgcolor="#deb887" >birthday</th>
+        <th bgcolor="#deb887" colspan=2>Action</th>
     </tr>
     </thead>
     <tbody>

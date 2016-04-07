@@ -24,7 +24,9 @@ public class editEmpl implements InternalController {
         try {
             Employee empl = new Employee();
             int id = Integer.parseInt((request.getParameter("id")));
+            int depId = Integer.parseInt((request.getParameter("depId")));
             request.setAttribute("employee", emplServ.findEmployeeById(id) );
+            request.setAttribute("depId", depId );
             request.getRequestDispatcher("empl/create.jsp").forward(request, response);
         }catch (SQLException e) {
             e.printStackTrace();

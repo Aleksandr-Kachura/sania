@@ -32,8 +32,9 @@ public class saveEmpl implements InternalController {
             empl.setFirstName(request.getParameter("firstName"));
             empl.setSecondName(request.getParameter("secondName"));
             empl.setBirthday(Date.valueOf(request.getParameter("birthday")));
-            empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
             String str = request.getParameter("id");
+            empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
+         //   String str = request.getParameter("id");
             if(request.getParameter("id").isEmpty())
             {
                 empServ.add(empl);
@@ -43,8 +44,7 @@ public class saveEmpl implements InternalController {
                 empl.setId(Integer.valueOf(request.getParameter("id")));
                 empServ.update(empl);
             }
-            empServ.add(empl);
-        }catch (SQLException e) {
+         }catch (SQLException e) {
             e.printStackTrace();
         }
         String url ="/showAllEmpl?depId="+request.getParameter("depId");

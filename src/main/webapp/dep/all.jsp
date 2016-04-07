@@ -12,9 +12,9 @@
 <table border=1>
     <thead>
     <tr>
-        <th>Dep Id</th>
-        <th>Name</th>
-        <th colspan=2>Action</th>
+        <th bgcolor="#deb887">Dep Id</th>
+        <th bgcolor="#deb887">Name</th>
+        <th bgcolor="#deb887" colspan=2>Action</th>
     </tr>
     </thead>
     <tbody>
