@@ -28,39 +28,42 @@ public class saveDep implements InternalController {
 
         try {
             Department dep = new Department();
+            ValidatorUtils util = new ValidatorUtils();
             dep.setName(request.getParameter("name"));
             if(request.getParameter("id").isEmpty())
             {
 
-
-                   // LOG.severe("Object " + bo + " is invalid.");
-
-                    try {
-                        ValidatorUtils util = new ValidatorUtils();
-                        util.validate(dep);
-                    }catch (ValidationException e)
-                    {
-                        Map<String,String> error = e.getError();
-                        request.setAttribute("error", error );
-                        request.getRequestDispatcher("dep/create.jsp").forward(request, response);
-
-
-                    }
-                    //throw new BussinessException(violations);
-                    depServ.add(dep);
-                }
-
-
+                util.validate(dep);
+                depServ.add(dep);
+            }
             else
             {
                 dep.setId(Integer.valueOf(request.getParameter("id")));
+                util.validate(dep);
                 depServ.update(dep);
             }
+
+           /* try {
+                ValidatorUtils util = new ValidatorUtils();
+                util.validate(dep);
+            }catch (ValidationException e)
+            {
+                Map<String,String> error = e.getError();
+                request.setAttribute("error", error );
+                request.getRequestDispatcher("dep/create.jsp").forward(request, response);
+
+            }*/
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        catch (ValidationException e) {
+            Map<String, String> error = e.getError();
+            request.setAttribute("error", error);
+            request.getRequestDispatcher("dep/create.jsp").forward(request, response);
+        }
 
-        response.sendRedirect("/showAllDep");
+
+            response.sendRedirect("/showAllDep");
       //  request.getRequestDispatcher("dep/create.jsp").forward(request, response);
     }
 }

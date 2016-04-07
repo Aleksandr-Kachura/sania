@@ -12,7 +12,7 @@ import net.sf.oval.guard.Guarded;
 public class Department extends Model{
 
     @NotNull
-    @NotEmpty(message = "Test Message")
+    @NotEmpty(message = "Name is empty")
      private String name;
 
     public String getName() {

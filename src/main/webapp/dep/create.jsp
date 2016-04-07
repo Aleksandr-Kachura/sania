@@ -12,7 +12,7 @@
         type="text" name="name"
         value="<c:out value="${department.name}" />" /> <br/>
     <c:forEach items="${error}" var="error">
-        ${error.value} <br/>
+       <p style="color: red"> ${error.value}</p>
     </c:forEach>
 
         <input type="hidden" name="id" value="<c:out value="${department.id}" />">

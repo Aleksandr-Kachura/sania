@@ -19,7 +19,6 @@ public class editDep implements InternalController {
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            Department dep = new Department();
             int id = Integer.parseInt((request.getParameter("id")));
             request.setAttribute("department", depServ.findDepartmentById(id) );
             request.getRequestDispatcher("dep/create.jsp").forward(request, response);
