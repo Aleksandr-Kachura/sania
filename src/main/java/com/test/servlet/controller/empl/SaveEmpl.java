@@ -8,6 +8,7 @@ import com.test.servlet.model.Employee;
 import com.test.servlet.service.EmployeeService;
 
 import com.test.servlet.service.impl.EmployeeServiceImpl;
+import com.test.servlet.util.ParseUtils;
 import com.test.servlet.util.ValidatorUtils;
 import net.sf.oval.Validator;
 
@@ -35,19 +36,9 @@ public class SaveEmpl implements InternalController {
         Employee empl = new Employee();
         empl.setFirstName(request.getParameter("firstName"));
         empl.setSecondName(request.getParameter("secondName"));
-       // empl.setBirthday(Date.valueOf(request.getParameter("birthday")));
-       String date2 = request.getParameter("birthday");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            Date birthday = dateFormat.parse(request.getParameter("birthday"));
-            empl.setBirthday(birthday);
-        }catch (ParseException e)
-        {
-
-        }
-
-        String str = request.getParameter("id");
+        ParseUtils parseUtil = new ParseUtils();
+        Date birthday = parseUtil.parse(request.getParameter("birthday"));
+        empl.setBirthday(birthday);
         empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
         try {
             ValidatorUtils util = new ValidatorUtils();
