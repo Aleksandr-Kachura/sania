@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class showAllEmpl implements InternalController {
+public class ShowAllEmpl implements InternalController {
 
 
     private EmployeeService emplServ =  new EmployeeServiceImpl() ;

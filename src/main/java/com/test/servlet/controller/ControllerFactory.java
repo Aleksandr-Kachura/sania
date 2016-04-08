@@ -16,16 +16,16 @@ public class ControllerFactory {
 
     {
         controllerMap.put("/", defaultController);
-        controllerMap.put("/addDep", new addDep());
-        controllerMap.put("/saveDep", new saveDep());
-        controllerMap.put("/showAllDep",new showAllDep());
-        controllerMap.put("/delDep",new delDep());
-        controllerMap.put("/editDep",new editDep());
-        controllerMap.put("/showAllEmpl",new showAllEmpl());
-        controllerMap.put("/addEmpl", new addEmpl());
-        controllerMap.put("/saveEmpl", new saveEmpl());
-        controllerMap.put("/delEmpl",new delEmpl());
-        controllerMap.put("/editEmpl",new editEmpl());
+        controllerMap.put("/addDep", new AddDep());
+        controllerMap.put("/saveDep", new SaveDep());
+        controllerMap.put("/showAllDep",new ShowAllDep());
+        controllerMap.put("/delDep",new DelDep());
+        controllerMap.put("/editDep",new EditDep());
+        controllerMap.put("/showAllEmpl",new ShowAllEmpl());
+        controllerMap.put("/addEmpl", new AddEmpl());
+        controllerMap.put("/saveEmpl", new SaveEmpl());
+        controllerMap.put("/delEmpl",new DelEmpl());
+        controllerMap.put("/editEmpl",new EditEmpl());
 
     }
 

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class showAllDep implements InternalController {
+public class ShowAllDep implements InternalController {
 
     private DepartmentService depServ =  new DepartmentServiceImpl() ;
 

@@ -63,6 +63,27 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     }
 
+    public Department findDepartmentByName(String name) throws SQLException
+    {
+        Connection connection = DBConnectionUtils.createConnection();
+        Department department = new Department();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from department where name=?");
+            // Parameters start with 1
+            preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                department.setId(rs.getInt("id"));
+                department.setName(rs.getString("name"));
+            }
+
+        }finally {
+            connection.close();
+        }
+        return  department;
+
+    }
+
 
     public void delete(Department model) throws SQLException
     {

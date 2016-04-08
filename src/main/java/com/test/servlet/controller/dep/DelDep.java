@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class delDep implements InternalController {
+public class DelDep implements InternalController {
 
 
     private DepartmentService depServ =  new DepartmentServiceImpl() ;

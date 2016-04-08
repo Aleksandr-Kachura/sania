@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class saveDep implements InternalController {
+public class SaveDep implements InternalController {
 
 
     private DepartmentService depServ =  new DepartmentServiceImpl() ;
@@ -26,10 +26,12 @@ public class saveDep implements InternalController {
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        Department dep = new Department();
+        dep.setName(request.getParameter("name"));
         try {
-            Department dep = new Department();
+
             ValidatorUtils util = new ValidatorUtils();
-            dep.setName(request.getParameter("name"));
+            dep.setName(request.getParameter("name").trim());
             if(request.getParameter("id").isEmpty())
             {
 
@@ -42,23 +44,13 @@ public class saveDep implements InternalController {
                 util.validate(dep);
                 depServ.update(dep);
             }
-
-           /* try {
-                ValidatorUtils util = new ValidatorUtils();
-                util.validate(dep);
-            }catch (ValidationException e)
-            {
-                Map<String,String> error = e.getError();
-                request.setAttribute("error", error );
-                request.getRequestDispatcher("dep/create.jsp").forward(request, response);
-
-            }*/
         }catch (SQLException e) {
             e.printStackTrace();
         }
         catch (ValidationException e) {
             Map<String, String> error = e.getError();
             request.setAttribute("error", error);
+            request.setAttribute("department", dep);
             request.getRequestDispatcher("dep/create.jsp").forward(request, response);
         }
 

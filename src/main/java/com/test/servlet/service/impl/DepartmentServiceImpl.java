@@ -24,6 +24,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.findDepartmentById(id);
     }
 
+    public Department findDepartmentByName(String name) throws SQLException {
+        return departmentDao.findDepartmentByName(name.toString());
+    }
+
     public void add (Department dep) throws SQLException{
         departmentDao.add(dep);
     }

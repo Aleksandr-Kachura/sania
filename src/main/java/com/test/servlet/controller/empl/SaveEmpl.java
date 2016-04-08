@@ -2,11 +2,13 @@ package com.test.servlet.controller.empl;
 
 import com.test.servlet.controller.InternalController;
 
+import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Employee;
 
 import com.test.servlet.service.EmployeeService;
 
 import com.test.servlet.service.impl.EmployeeServiceImpl;
+import com.test.servlet.util.ValidatorUtils;
 import net.sf.oval.Validator;
 
 import javax.servlet.ServletException;
@@ -18,9 +20,10 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 
-public class saveEmpl implements InternalController {
+public class SaveEmpl implements InternalController {
 
 
     private EmployeeService empServ =  new EmployeeServiceImpl();
@@ -28,26 +31,40 @@ public class saveEmpl implements InternalController {
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        Employee empl = new Employee();
+        empl.setFirstName(request.getParameter("firstName"));
+        empl.setSecondName(request.getParameter("secondName"));
+        empl.setBirthday(Date.valueOf(request.getParameter("birthday")));
+        String str = request.getParameter("id");
+        empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
+
         try {
-            Employee empl = new Employee();
-            empl.setFirstName(request.getParameter("firstName"));
-            empl.setSecondName(request.getParameter("secondName"));
-            empl.setBirthday(Date.valueOf(request.getParameter("birthday")));
-            String str = request.getParameter("id");
-            empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
+
+
+            ValidatorUtils util = new ValidatorUtils();
+            util.validate(empl);
          //   String str = request.getParameter("id");
             if(request.getParameter("id").isEmpty())
             {
 
+              //  util.validate(empl);
                 empServ.add(empl);
             }
             else
             {
+               // util.validate(empl);
                 empl.setId(Integer.valueOf(request.getParameter("id")));
                 empServ.update(empl);
             }
          }catch (SQLException e) {
             e.printStackTrace();
+        }catch (ValidationException e)
+        {
+            Map<String, String> error = e.getError();
+            request.setAttribute("error", error);
+            request.setAttribute("depId", request.getParameter("depId"));
+            request.setAttribute("employee", empl );
+            request.getRequestDispatcher("empl/create.jsp").forward(request, response);
         }
         String url ="/showAllEmpl?depId="+request.getParameter("depId");
         response.sendRedirect(url);

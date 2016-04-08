@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class addDep implements InternalController {
+public class AddDep implements InternalController {
 
 
 

@@ -16,4 +16,6 @@ public interface DepartmentService {
     void update(Department dep) throws SQLException;
 
     Department findDepartmentById(int id) throws SQLException;
+
+    Department findDepartmentByName(String name) throws SQLException;
 }
