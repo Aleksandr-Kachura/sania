@@ -16,10 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import java.sql.Date;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -34,25 +35,29 @@ public class SaveEmpl implements InternalController {
         Employee empl = new Employee();
         empl.setFirstName(request.getParameter("firstName"));
         empl.setSecondName(request.getParameter("secondName"));
-        empl.setBirthday(Date.valueOf(request.getParameter("birthday")));
-        String str = request.getParameter("id");
-        empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
+       // empl.setBirthday(Date.valueOf(request.getParameter("birthday")));
+       String date2 = request.getParameter("birthday");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
+            Date birthday = dateFormat.parse(request.getParameter("birthday"));
+            empl.setBirthday(birthday);
+        }catch (ParseException e)
+        {
 
+        }
 
+        String str = request.getParameter("id");
+        empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
+        try {
             ValidatorUtils util = new ValidatorUtils();
             util.validate(empl);
-         //   String str = request.getParameter("id");
             if(request.getParameter("id").isEmpty())
             {
-
-              //  util.validate(empl);
                 empServ.add(empl);
             }
             else
             {
-               // util.validate(empl);
                 empl.setId(Integer.valueOf(request.getParameter("id")));
                 empServ.update(empl);
             }
@@ -68,6 +73,5 @@ public class SaveEmpl implements InternalController {
         }
         String url ="/showAllEmpl?depId="+request.getParameter("depId");
         response.sendRedirect(url);
-      //  request.getRequestDispatcher("dep/create.jsp").forward(request, response);
     }
 }

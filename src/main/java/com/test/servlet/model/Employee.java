@@ -1,12 +1,8 @@
 package com.test.servlet.model;
 
 
-import com.test.servlet.util.DateUtils;
-import com.test.servlet.util.UniqueUtils;
-import net.sf.oval.constraint.CheckWith;
+import net.sf.oval.constraint.DateRange;
 import net.sf.oval.constraint.NotEmpty;
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
 
 import java.util.Date;
 
@@ -21,7 +17,8 @@ public class Employee extends Model {
     @NotEmpty(message = "SecondName is empty")
     private String secondName;
 
-    @CheckWith(value = DateUtils.class,message = "Invalid format")
+
+    @DateRange( format = "MM/DD/YYYY", message="Invalid Format", min="01/01/1900",max = "now")
     private Date birthday;
 
     public int getDepId() {
