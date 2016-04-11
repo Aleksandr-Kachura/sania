@@ -1,5 +1,6 @@
 package com.test.servlet.service;
 
+import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
 
 import java.sql.SQLException;
@@ -16,4 +17,6 @@ public interface EmployeeService {
      void update(Employee employee) throws SQLException;
 
      Employee findEmployeeById(int id) throws SQLException;
+
+     Employee findEmployeeByEmail(String email) throws SQLException;
 }

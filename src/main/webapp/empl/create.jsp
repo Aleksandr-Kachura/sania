@@ -5,18 +5,27 @@
 <html>
 <head>
        <title>Add new user</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 </head>
-<body>
-<form method="POST" action='saveEmpl' name="frmAddUser">
-   <p>firstName :</p>  <input type="text" name="firstName" value="<c:out value="${employee.firstName}" />" /> <br/>
-    <p style="color: red"> ${error.get("firstName")}</p>
-   <p>secondName :</p>  <input type="text" name="secondName" value="<c:out value="${employee.secondName}" />" /> <br/>
-    <p style="color: red"> ${error.get("secondName")}</p>
-    <p>Birthday :</p> <input type="date" name="birthday" id="dateInput" required value="${employee.birthday}"/><br />
-    <p style="color: red"> ${error.get("birthday")}</p>
-   <input type="hidden" name="depId" value="<c:out value="${depId}" />" >
-   <input type="hidden" name="id" value="<c:out value="${employee.id}" />">
-   <input type="submit" value="Submit" />
-</form>
+<body background="../res/img/406821.jpg">
+<div class="container">
+    <div class="col-md-6">
+        <form method="POST" action='saveEmpl' name="frmAddUser" >
+            <fieldset class="form-group" >
+                <p>firstName :</p>  <input type="text" name="firstName" value="<c:out value="${employee.firstName}" />" /> <br/>
+                <p style="color: red"> ${error.get("firstName")}</p>
+                <p>secondName :</p>  <input type="text" name="secondName" value="<c:out value="${employee.secondName}" />" /> <br/>
+                <p style="color: red"> ${error.get("secondName")}</p>
+                <p>Birthday :</p> <input type="date" name="birthday" id="dateInput" required value="${employee.birthday}"/><br />
+                <p style="color: red"> ${error.get("birthday")}</p>
+                <p>Email :</p>  <input type="text" name="email" placeholder="email..." value="<c:out value="${employee.email}" />" /> <br/>
+                <p style="color: red"> ${error.get("email")}</p>
+                <input type="hidden" name="depId" value="<c:out value="${depId}" />" >
+                <input type="hidden" name="id" value="<c:out value="${employee.id}" />">
+                <input type="submit" value="Submit" />
+            </fieldset>
+        </form>
+    </div>
+</div>
 </body>
 </html>

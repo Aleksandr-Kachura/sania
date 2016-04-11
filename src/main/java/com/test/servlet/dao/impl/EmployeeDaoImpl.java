@@ -33,6 +33,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 employee.setSecondName(rs.getString("secondName"));
                 employee.setBirthday(rs.getDate("birthday"));
                 employee.setDepId(rs.getInt("depId"));
+                employee.setEmail(rs.getString("email"));
                 employees.add(employee);
             }
 
@@ -62,13 +63,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         Connection connection = DBConnectionUtils.createConnection();
         try {
-            String SQL = "insert into employee (firstName,secondName,birthday,depId) values (?,?,?,?)";
+            String SQL = "insert into employee (firstName,secondName,birthday,depId,email) values (?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, model.getFirstName());
             preparedStatement.setString(2, model.getSecondName());
             preparedStatement.setDate(3, new java.sql.Date(model.getBirthday().getTime()));
             preparedStatement.setInt(4, model.getDepId());
-
+            preparedStatement.setString(5, model.getEmail());
             preparedStatement.executeUpdate();
         }finally {
             connection.close();
@@ -81,13 +82,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public void update(Employee employee) throws SQLException{
 
         Connection connection = DBConnectionUtils.createConnection();
-        String sql = "UPDATE employee SET firstName = ?, secondName = ?, birthday = ?  WHERE id = ?";
+        String sql = "UPDATE employee SET firstName = ?, secondName = ?, birthday = ?, email = ?   WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, employee.getFirstName());
             preparedStatement.setString(2, employee.getSecondName());
             preparedStatement.setDate(3, new java.sql.Date(employee.getBirthday().getTime()));
-            preparedStatement.setInt(4, employee.getId());
+            preparedStatement.setString(4, employee.getEmail());
+            preparedStatement.setInt(5, employee.getId());
             preparedStatement.executeUpdate();
 
         }finally {
@@ -112,6 +114,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 employee.setSecondName(rs.getString("secondName"));
                 employee.setBirthday(rs.getDate("birthday"));
                 employee.setDepId(rs.getInt("depId"));
+                employee.setEmail(rs.getString("email"));
 
             }
 
@@ -120,6 +123,29 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
         return  employee;
 
+    }
+
+    public  Employee findEmployeeByEmail(String email) throws SQLException
+    {
+        Connection connection = DBConnectionUtils.createConnection();
+        Employee employee = new Employee();
+             try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from employee where email=?");
+            // Parameters start with 1
+            preparedStatement.setString(1, email);
+            ResultSet rs = preparedStatement.executeQuery();
+             if (rs.next()) {
+                 employee.setId(rs.getInt("id"));
+                 employee.setFirstName(rs.getString("firstName"));
+                 employee.setSecondName(rs.getString("secondName"));
+                 employee.setBirthday(rs.getDate("birthday"));
+                 employee.setEmail(rs.getString("email"));
+                 employee.setDepId(rs.getInt("depId"));
+              }
+        }finally {
+            connection.close();
+        }
+        return employee;
     }
 
 

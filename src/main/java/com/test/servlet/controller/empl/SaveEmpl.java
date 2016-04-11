@@ -38,6 +38,7 @@ public class SaveEmpl implements InternalController {
         empl.setSecondName(request.getParameter("secondName"));
         ParseUtils parseUtil = new ParseUtils();
         Date birthday = parseUtil.parse(request.getParameter("birthday"));
+        empl.setEmail(request.getParameter("email"));
         empl.setBirthday(birthday);
         empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
         try {
@@ -58,6 +59,7 @@ public class SaveEmpl implements InternalController {
         {
             Map<String, String> error = e.getError();
             request.setAttribute("error", error);
+            request.setAttribute("id", request.getParameter("id"));
             request.setAttribute("depId", request.getParameter("depId"));
             request.setAttribute("employee", empl );
             request.getRequestDispatcher("empl/create.jsp").forward(request, response);

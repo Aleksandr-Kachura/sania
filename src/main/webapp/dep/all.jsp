@@ -7,39 +7,47 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <title>Show All Departments</title>
+    <link href="<c:url value="" />" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+   <link href="<c:url value="../res/css/main.css" />" rel="stylesheet">
 </head>
-<body>
-<table border=1>
-    <thead>
-    <tr>
-        <th bgcolor="#deb887">Dep Id</th>
-        <th bgcolor="#deb887">Name</th>
-        <th bgcolor="#deb887" colspan=2>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${departments}" var="dep">
-        <tr>
-            <td><c:out value="${dep.id}" /></td>
-            <td><a class="btn btn-lg btn-danger" href="<c:url value="/showAllEmpl?depId=${dep.id}" />" role="button">${dep.name}</a></td>
-            <td>
-                <form method="post" action="/delDep">
-                    <input type="hidden" name="id" value=${dep.id}>
-                    <input type="submit" value="Delete">
-                </form>
-            </td>
-            <td>
-                <form method="post" action="/editDep">
-                    <input type="hidden" name="id" value=${dep.id}>
-                    <input type="submit" value="Update">
-                </form>
-            </td>
+<body background="../res/img/406821.jpg">
+<div class="container"  >
+    <div class="row" >
+            <table class="table table-sm" border="3" bgcolor="#556b2f"  >
+                <thead>
+                <tr>
+                    <th bgcolor="#deb887">Dep Id</th>
+                    <th bgcolor="#deb887">Name</th>
+                    <th bgcolor="#deb887"  colspan=2>Action</th>
+                </tr>
+                </thead>
+                <tbody b>
+                <c:forEach items="${departments}" var="dep">
+                    <tr bgcolor="silver">
+                        <td ><c:out  value="${dep.id}" /></td>
+                        <td><a  href="<c:url value="/showAllEmpl?depId=${dep.id}" />" role="button">${dep.name}</a></td>
+                        <td style="padding: 10px">
+                            <form method="post" action="/delDep">
+                                <input type="hidden" name="id" value=${dep.id}>
+                                <input  class="btn btn-danger" type="submit" value="Delete">
+                            </form>
+                        </td>
+                        <td style="padding: 10px">
+                            <form method="post" action="/editDep">
+                                <input type="hidden" name="id" value=${dep.id}>
+                                <input class="btn btn-success" type="submit" value="Update">
+                            </form>
+                        </td>
 
 
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-<p><a href="/addDep">Add Department</a></p>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <p><a href="/addDep">Add Department</a></p>
+    </div>
+</div>
+
 </body>
 </html>

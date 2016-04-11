@@ -14,4 +14,5 @@ public interface EmployeeDao{
     void delete(Employee model) throws SQLException;
     Employee findEmployeeById(int id) throws SQLException;
     void update(Employee model) throws SQLException;
+    Employee findEmployeeByEmail(String email) throws SQLException;
 }

@@ -1,7 +1,11 @@
 package com.test.servlet.model;
 
 
+import com.test.servlet.util.UniqueEmailUtils;
+import com.test.servlet.util.UniqueUtils;
+import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.DateRange;
+import net.sf.oval.constraint.Email;
 import net.sf.oval.constraint.NotEmpty;
 
 import java.util.Date;
@@ -20,6 +24,22 @@ public class Employee extends Model {
 
     @DateRange( format = "MM/DD/YYYY", message="Invalid Format", min="01/01/1900",max = "now")
     private Date birthday;
+
+    @NotEmpty(message = "Email is empty")
+    @Email(message = "Invalid format")
+    @CheckWith(value = UniqueEmailUtils.class,message = "Not Unique")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+
 
     public int getDepId() {
         return depId;

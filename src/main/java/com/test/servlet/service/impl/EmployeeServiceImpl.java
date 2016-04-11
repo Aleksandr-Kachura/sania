@@ -33,5 +33,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.findEmployeeById(id);
     }
 
+    public Employee findEmployeeByEmail(String email) throws SQLException
+    {
+        return employeeDao.findEmployeeByEmail(email);
+    }
+
 
 }
