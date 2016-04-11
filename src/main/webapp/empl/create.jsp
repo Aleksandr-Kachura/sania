@@ -16,9 +16,12 @@
                 <p style="color: red"> ${error.get("firstName")}</p>
                 <p>secondName :</p>  <input type="text" name="secondName" value="<c:out value="${employee.secondName}" />" /> <br/>
                 <p style="color: red"> ${error.get("secondName")}</p>
-                <p>Birthday :</p> <input type="date" name="birthday" id="dateInput" required value="${employee.birthday}"/><br />
+               <p>Birthday :</p> <input type="date" name="birthday" id="dateInput" required value="${param['birthday'] eq null ? employee.birthday : param['birthday']}"/><br />
+
                 <p style="color: red"> ${error.get("birthday")}</p>
                 <p>Email :</p>  <input type="text" name="email" placeholder="email..." value="<c:out value="${employee.email}" />" /> <br/>
+
+
                 <p style="color: red"> ${error.get("email")}</p>
                 <input type="hidden" name="depId" value="<c:out value="${depId}" />" >
                 <input type="hidden" name="id" value="<c:out value="${employee.id}" />">

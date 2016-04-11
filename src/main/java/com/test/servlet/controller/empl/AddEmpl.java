@@ -16,7 +16,7 @@ public class AddEmpl implements InternalController {
 
         int depId = Integer.parseInt((request.getParameter("depId")));
         request.setAttribute("depId", depId );
-        request.setAttribute("id", request.getParameter("id") );
+       /// request.setAttribute("id", request.getParameter("id") );
         request.getRequestDispatcher("empl/create.jsp").forward(request, response);
     }
 }

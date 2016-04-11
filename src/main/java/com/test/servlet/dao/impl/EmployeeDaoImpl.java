@@ -115,7 +115,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 employee.setBirthday(rs.getDate("birthday"));
                 employee.setDepId(rs.getInt("depId"));
                 employee.setEmail(rs.getString("email"));
-
             }
 
         }finally {
