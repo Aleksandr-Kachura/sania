@@ -23,7 +23,6 @@ public class ShowAllEmpl implements InternalController {
 
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         int depId = Integer.parseInt((request.getParameter("depId")));
         try {
             request.setAttribute("depId", depId );
@@ -32,7 +31,6 @@ public class ShowAllEmpl implements InternalController {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
         request.getRequestDispatcher("empl/all.jsp").forward(request, response);
 
     }

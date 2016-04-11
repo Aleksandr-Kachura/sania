@@ -17,7 +17,6 @@ public class EditDep implements InternalController {
     private DepartmentService depServ =  new DepartmentServiceImpl() ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             int id = Integer.parseInt((request.getParameter("id")));
             request.setAttribute("department", depServ.findDepartmentById(id) );

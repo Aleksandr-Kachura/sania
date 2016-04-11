@@ -19,14 +19,11 @@ public class DepartmentDaoImpl implements DepartmentDao{
     private static Logger log = Logger.getLogger(DepartmentDaoImpl.class);
 
     public List<Department> findAll() throws SQLException {
-
         Connection connection = DBConnectionUtils.createConnection();
         List<Department> departments = new ArrayList<Department>();
         try {
             String SQL = "select * from department";
             Statement statement = connection.createStatement();
-
-            //TODO почитать
             ResultSet rs = statement.executeQuery(SQL);
             while (rs.next())
             {
@@ -38,7 +35,6 @@ public class DepartmentDaoImpl implements DepartmentDao{
         }finally {
             connection.close();
         }
-
         return departments;
     }
 

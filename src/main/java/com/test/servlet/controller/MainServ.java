@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created on 05.04.16.
  */
-public class Test extends HttpServlet {
+public class MainServ extends HttpServlet {
 
     private DepartmentService depServ =  new DepartmentServiceImpl() ;
 

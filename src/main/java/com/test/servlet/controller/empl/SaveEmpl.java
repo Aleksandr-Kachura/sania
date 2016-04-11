@@ -64,7 +64,6 @@ public class SaveEmpl implements InternalController {
             request.setAttribute("error", error);
             request.setAttribute("depId", request.getParameter("depId"));
             request.setAttribute("id", id);
-          //  empl.setId(parseUtil.parseStrToInteger(request.getParameter("id")));
             request.setAttribute("employee", empl );
             request.getRequestDispatcher("empl/create.jsp").forward(request, response);
         }

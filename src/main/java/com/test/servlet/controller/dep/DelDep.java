@@ -19,7 +19,6 @@ public class DelDep implements InternalController {
 
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             Department dep = new Department();
             int id = Integer.parseInt((request.getParameter("id")));
@@ -28,8 +27,6 @@ public class DelDep implements InternalController {
         }catch (SQLException e) {
             e.printStackTrace();
         }
-
         response.sendRedirect("/showAllDep");
-        //  request.getRequestDispatcher("dep/create.jsp").forward(request, response);
     }
 }

@@ -38,9 +38,6 @@ public class Employee extends Model {
         this.email = email;
     }
 
-
-
-
     public int getDepId() {
         return depId;
     }

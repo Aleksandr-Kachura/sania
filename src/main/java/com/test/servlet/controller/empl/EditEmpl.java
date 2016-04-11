@@ -20,9 +20,7 @@ public class EditEmpl implements InternalController {
     private EmployeeService emplServ =  new EmployeeServiceImpl() ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
-            Employee empl = new Employee();
             int id = Integer.parseInt((request.getParameter("id")));
             int depId = Integer.parseInt((request.getParameter("depId")));
             request.setAttribute("employee", emplServ.findEmployeeById(id) );

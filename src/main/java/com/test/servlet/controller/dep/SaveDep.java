@@ -20,7 +20,6 @@ public class SaveDep implements InternalController {
     private DepartmentService depServ = new DepartmentServiceImpl();
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Department dep = new Department();
         dep.setName(request.getParameter("name").trim());
         try {
@@ -39,8 +38,6 @@ public class SaveDep implements InternalController {
             request.setAttribute("department", dep);
             request.getRequestDispatcher("dep/create.jsp").forward(request, response);
         }
-
-
         response.sendRedirect("/showAllDep");
     }
 }

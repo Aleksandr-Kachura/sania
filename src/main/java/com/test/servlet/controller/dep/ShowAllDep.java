@@ -18,10 +18,8 @@ public class ShowAllDep implements InternalController {
     private DepartmentService depServ =  new DepartmentServiceImpl() ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             request.setAttribute("departments", depServ.findAll() );
-          //  List<Department> list = depServ.findAll();
             request.getRequestDispatcher("dep/all.jsp").forward(request, response);
         }catch (SQLException e) {
             e.printStackTrace();

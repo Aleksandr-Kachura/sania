@@ -12,7 +12,6 @@ public class Model implements Serializable {
 
     }
 
-
     public Model(int id){
         this.id = id;
     }

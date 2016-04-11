@@ -26,7 +26,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-
                 Employee employee = new Employee();
                 employee.setId(rs.getInt("id"));
                 employee.setFirstName(rs.getString("firstName"));
