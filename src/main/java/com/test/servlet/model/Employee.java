@@ -8,10 +8,22 @@ import net.sf.oval.constraint.DateRange;
 import net.sf.oval.constraint.Email;
 import net.sf.oval.constraint.NotEmpty;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Entity(name="employee")
+public class Employee  {
 
-public class Employee extends Model {
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     private  int depId;
 
