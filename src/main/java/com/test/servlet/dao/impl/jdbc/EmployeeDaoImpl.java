@@ -1,4 +1,4 @@
-package com.test.servlet.dao.impl;
+package com.test.servlet.dao.impl.jdbc;
 
 import com.test.servlet.dao.DepartmentDao;
 import com.test.servlet.dao.EmployeeDao;
@@ -144,6 +144,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
             connection.close();
         }
         return employee;
+    }
+
+
+    public void saveOrUpdate(Employee model) throws SQLException
+    {
+        Connection connection = DBConnectionUtils.createConnection();
+        try {
+            String SQL = "select employee SET name2 = ? where id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.executeUpdate();
+        }finally {
+            connection.close();
+        }
+
     }
 
 

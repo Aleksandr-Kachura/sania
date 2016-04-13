@@ -2,7 +2,7 @@ package com.test.servlet.service.impl;
 
 
 import com.test.servlet.dao.EmployeeDao;
-import com.test.servlet.dao.impl.EmployeeDaoImpl;
+import com.test.servlet.dao.impl.hiber.EmployeeDaoImpl;
 import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Employee;
 import com.test.servlet.service.EmployeeService;
@@ -23,6 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.findAllEmployee(id);
     }
 
+    /** @deprecated */
     public void add(Employee empl) throws SQLException, ValidationException {
         util.validate(empl);
         employeeDao.add(empl);
@@ -31,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void delete(Employee empl) throws SQLException {
         employeeDao.delete(empl);
     }
-
+    /** @deprecated */
     public void update(Employee empl) throws SQLException, ValidationException  {
         util.validate(empl);
         employeeDao.update(empl);
@@ -43,6 +44,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Employee findEmployeeByEmail(String email) throws SQLException {
         return employeeDao.findEmployeeByEmail(email);
+    }
+
+    public void saveOrUpdate(Employee empl) throws SQLException, ValidationException
+    {
+        util.validate(empl);
+        employeeDao.saveOrUpdate(empl);
     }
 
 

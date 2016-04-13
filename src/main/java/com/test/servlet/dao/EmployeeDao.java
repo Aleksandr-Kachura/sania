@@ -10,9 +10,12 @@ import java.util.List;
 public interface EmployeeDao{
 
     List<Employee> findAllEmployee(int id) throws SQLException;
+    /** @deprecated */
     void add(Employee model) throws SQLException;
     void delete(Employee model) throws SQLException;
     Employee findEmployeeById(int id) throws SQLException;
+    /** @deprecated */
     void update(Employee model) throws SQLException;
+    void saveOrUpdate(Employee model) throws SQLException;
     Employee findEmployeeByEmail(String email) throws SQLException;
 }

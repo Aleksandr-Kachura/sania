@@ -46,7 +46,7 @@ public class SaveEmpl implements InternalController {
         try {
             if(id.isEmpty() || id.contains("0"))
             {
-                empServ.add(empl);
+                empServ.saveOrUpdate(empl);
             }
             else
             {

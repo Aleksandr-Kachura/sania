@@ -8,29 +8,26 @@ import net.sf.oval.constraint.DateRange;
 import net.sf.oval.constraint.Email;
 import net.sf.oval.constraint.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name="employee")
 public class Employee  {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    private  int depId;
+    @Column(name = "depId")
+    private  Integer depId;
 
     @NotEmpty(message = "FirstName is empty")
+    @Column(name = "firstName")
     private String firstName;
 
     @NotEmpty(message = "SecondName is empty")
+    @Column(name = "secondName")
     private String secondName;
 
 
@@ -40,6 +37,7 @@ public class Employee  {
     @NotEmpty(message = "Email is empty")
     @Email(message = "Invalid format")
     @CheckWith(value = UniqueEmailUtils.class,message = "Not Unique")
+    @Column(name = "email")
     private String email;
 
     public String getEmail() {
@@ -72,6 +70,18 @@ public class Employee  {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDepId(Integer depId) {
+        this.depId = depId;
     }
 
 

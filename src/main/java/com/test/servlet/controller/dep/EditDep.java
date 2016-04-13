@@ -19,6 +19,7 @@ public class EditDep implements InternalController {
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt((request.getParameter("id")));
+            Department dep = depServ.findDepartmentById(id);
             request.setAttribute("department", depServ.findDepartmentById(id) );
             request.getRequestDispatcher("dep/create.jsp").forward(request, response);
         }catch (SQLException e) {

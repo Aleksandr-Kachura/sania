@@ -16,6 +16,8 @@ public interface EmployeeService {
 
      void update(Employee employee) throws SQLException, ValidationException;
 
+     void saveOrUpdate(Employee employee) throws SQLException, ValidationException;
+
      Employee findEmployeeById(int id) throws SQLException;
 
      Employee findEmployeeByEmail(String email) throws SQLException;

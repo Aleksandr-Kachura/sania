@@ -5,6 +5,8 @@ import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Department;
 import com.test.servlet.service.DepartmentService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
+import com.test.servlet.util.HiberUtil;
+import org.hibernate.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +27,10 @@ public class SaveDep implements InternalController {
         try {
             if (request.getParameter("id").isEmpty()) {
 
-                depServ.add(dep);
+                depServ.saveOrUpdate(dep);
             } else {
                 dep.setId(Integer.valueOf(request.getParameter("id")));
-                depServ.update(dep);
+                depServ.saveOrUpdate(dep);
             }
         } catch (SQLException e) {
             e.printStackTrace();

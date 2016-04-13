@@ -1,4 +1,4 @@
-package com.test.servlet.dao.impl;
+package com.test.servlet.dao.impl.jdbc;
 
 import com.test.servlet.dao.DepartmentDao;
 import com.test.servlet.model.Department;
@@ -116,6 +116,22 @@ public class DepartmentDaoImpl implements DepartmentDao{
         Connection connection = DBConnectionUtils.createConnection();
         try {
             String SQL = "update department SET name = ? where id=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, model.getName());
+            preparedStatement.setInt(2, model.getId());
+            preparedStatement.executeUpdate();
+
+        }finally {
+            connection.close();
+        }
+
+    }
+
+   public void saveOrUpdate(Department model) throws SQLException
+    {
+        Connection connection = DBConnectionUtils.createConnection();
+        try {
+           String SQL = "update department SET name2 = ? where id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, model.getName());
             preparedStatement.setInt(2, model.getId());

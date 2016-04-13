@@ -5,31 +5,29 @@ import com.test.servlet.util.UniqueUtils;
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.NotEmpty;
 import net.sf.oval.constraint.NotNull;
+import net.sf.oval.constraint.ValidateWithMethod;
+import org.hibernate.annotations.Filter;
 
 import javax.persistence.*;
 import java.util.Set;
 
 
-@Entity(name="department")
+@Entity
+@Table(name = "department")
 public class Department{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", length = 6, nullable = false)
     private Integer id;
-
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "department", fetch = FetchType.LAZY)
-    private Set<Employee> employees;
 
     @NotNull
     @NotEmpty(message = "Name is empty")
     @CheckWith(value = UniqueUtils.class,message = "Not Unique")
+    @Column(name = "name")
     private String name;
 
-    public Set<Employee> getEmployees() {
-        return employees;
-    }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
-    }
 
     public String getName() {
         return name;

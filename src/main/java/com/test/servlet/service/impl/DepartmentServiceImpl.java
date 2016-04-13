@@ -1,7 +1,7 @@
 package com.test.servlet.service.impl;
 
 import com.test.servlet.dao.DepartmentDao;
-import com.test.servlet.dao.impl.DepartmentDaoImpl;
+import com.test.servlet.dao.impl.hiber.DepartmentDaoImpl;
 import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Department;
 import com.test.servlet.service.DepartmentService;
@@ -30,7 +30,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department findDepartmentByName(String name) throws SQLException {
         return departmentDao.findDepartmentByName(name.toString());
     }
-
+    /** @deprecated */
     public void add(Department dep) throws SQLException, ValidationException {
         util.validate(dep);
         departmentDao.add(dep);
@@ -40,9 +40,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentDao.delete(dep);
     }
 
+    /** @deprecated */
     public void update(Department dep) throws SQLException, ValidationException {
         util.validate(dep);
         departmentDao.update(dep);
+    }
+
+    public void saveOrUpdate(Department dep) throws SQLException, ValidationException
+    {
+        util.validate(dep);
+        departmentDao.saveOrUpdate(dep);
     }
 
 }
