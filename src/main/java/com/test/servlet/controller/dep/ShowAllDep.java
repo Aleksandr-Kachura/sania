@@ -4,6 +4,7 @@ import com.test.servlet.controller.InternalController;
 import com.test.servlet.model.Department;
 import com.test.servlet.service.DepartmentService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

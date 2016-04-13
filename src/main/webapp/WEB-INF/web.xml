@@ -5,12 +5,23 @@
          version="3.0">
 
     <servlet>
-        <servlet-name>MainServ</servlet-name>
-        <servlet-class>com.test.servlet.controller.MainServ</servlet-class>
+        <servlet-name>main</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
     </servlet>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/*Context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
     <servlet-mapping>
-        <servlet-name>MainServ</servlet-name>
+        <servlet-name>main</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
