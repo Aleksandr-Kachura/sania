@@ -8,6 +8,8 @@ import com.test.servlet.service.DepartmentService;
 import com.test.servlet.service.EmployeeService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
+@Controller(value = "/showAllEmpl")
 public class ShowAllEmpl implements InternalController {
 
 
-    private EmployeeService emplServ =  new EmployeeServiceImpl() ;
+    @Autowired
+    private EmployeeServiceImpl emplServ;
 
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

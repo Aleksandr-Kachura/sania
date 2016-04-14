@@ -11,6 +11,8 @@ import com.test.servlet.service.impl.EmployeeServiceImpl;
 import com.test.servlet.util.ParseUtils;
 import com.test.servlet.util.ValidatorUtils;
 import net.sf.oval.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +26,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-
+@Controller(value = "/saveEmpl")
 public class SaveEmpl implements InternalController {
 
+    @Autowired
+    private EmployeeServiceImpl emplServ;
 
-    private EmployeeService empServ =  new EmployeeServiceImpl();
-    private ParseUtils  parseUtil = new ParseUtils();
+    @Autowired
+    private ParseUtils  parseUtil ;
 
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,12 +50,12 @@ public class SaveEmpl implements InternalController {
         try {
             if(id.isEmpty() || id.contains("0"))
             {
-                empServ.saveOrUpdate(empl);
+                emplServ.saveOrUpdate(empl);
             }
             else
             {
                 empl.setId(parseUtil.parseStrToInteger(request.getParameter("id")));
-                empServ.update(empl);
+                emplServ.update(empl);
             }
 
             String url ="/showAllEmpl?depId="+request.getParameter("depId");

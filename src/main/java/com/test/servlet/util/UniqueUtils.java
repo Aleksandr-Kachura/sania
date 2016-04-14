@@ -6,6 +6,8 @@ import com.test.servlet.service.DepartmentService;
 
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import net.sf.oval.constraint.CheckWithCheck;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -14,9 +16,11 @@ import java.util.Map;
 /**
  * Created on 08.04.16.
  */
+@Component
 public class UniqueUtils  implements CheckWithCheck.SimpleCheck {
 
-    private DepartmentService departmentService = new DepartmentServiceImpl();
+    @Autowired
+    private DepartmentServiceImpl departmentService;
 
     public boolean isSatisfied(Object validatedObject, Object value)
     {

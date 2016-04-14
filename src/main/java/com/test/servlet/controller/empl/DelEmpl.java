@@ -6,6 +6,8 @@ import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
 import com.test.servlet.service.EmployeeService;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+@Controller(value = "/delEmpl")
 public class DelEmpl implements InternalController {
 
 
 
-    private EmployeeService emplServ =  new EmployeeServiceImpl() ;
+    @Autowired
+    private EmployeeServiceImpl emplServ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt((request.getParameter("id")));

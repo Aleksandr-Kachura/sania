@@ -4,23 +4,32 @@ import com.test.servlet.dao.EmployeeDao;
 import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
 import com.test.servlet.util.DBConnectionUtils;
-import com.test.servlet.util.HiberUtil;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-
+@Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
 
-    Session session = HiberUtil.getSessionFactory().openSession();
+    //Session session = HiberUtil.getSessionFactory().openSession();
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public List<Employee> findAllEmployee(int id) throws SQLException {
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("from employee where depId= :depId");
         query.setParameter("depId", id);
@@ -31,6 +40,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     public void delete(Employee model) throws SQLException {
+        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.load(Employee.class, model.getId());
@@ -46,7 +56,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     /** @deprecated */
     public void add(Employee model) throws SQLException {
 
-
+        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.load(Employee.class, model.getId());
@@ -64,6 +74,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     /** @deprecated */
     public void update(Employee employee) throws SQLException {
 
+        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.load(Employee.class, employee.getId());
@@ -81,6 +92,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     public Employee findEmployeeById(int id) throws SQLException {
         Employee employee = new Employee();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("from employee where id= :id");
         query.setParameter("id", id);
@@ -101,6 +113,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     public Employee findEmployeeByEmail(String email) throws SQLException {
         Employee employee = new Employee();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("from employee where email= :email");
         query.setParameter("email",email);
@@ -118,7 +131,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
   public void saveOrUpdate(Employee employee) throws SQLException {
-        try {
+      Session session = sessionFactory.openSession();
+      try {
             session.beginTransaction();
             session.merge(employee);
             session.getTransaction().commit();
@@ -129,16 +143,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     }
 
-    /*public void updateOrSave(Employee empl) throws SQLException
-    {
-        try {
-            session.beginTransaction();
-            session.merge(empl);
-            session.getTransaction().commit();
-        }finally {
-            session.close();
-        }
-    }*/
 
 
 }

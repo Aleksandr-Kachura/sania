@@ -4,29 +4,34 @@ import com.test.servlet.dao.DepartmentDao;
 import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
 import com.test.servlet.util.DBConnectionUtils;
-import com.test.servlet.util.HiberUtil;
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by user on 04.04.16.
- */
+@Repository
 public class DepartmentDaoImpl implements DepartmentDao{
 
-    Session session = HiberUtil.getSessionFactory().openSession();
+    //Session session = HiberUtil.getSessionFactory().openSession();
 
-
+    @Autowired
+    private SessionFactory sessionFactory;
     public List<Department> findAll() throws SQLException {
 
         List<Department> departments = new ArrayList<Department>();
+        Session session = sessionFactory.openSession();
         try{
+
             session.beginTransaction();
             departments = session.createCriteria(Department.class).list();
             session.getTransaction().commit();
@@ -36,9 +41,11 @@ public class DepartmentDaoImpl implements DepartmentDao{
        return departments;
     }
 
+
     public Department findDepartmentById(int id) throws SQLException
     {
         Department department = new Department();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("from Department where id= :id");
         query.setParameter("id",id);
@@ -60,6 +67,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
     public Department findDepartmentByName(String name) throws SQLException
     {
         Department department = new Department();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Query query = session.createQuery("from Department where name= :name");
         query.setParameter("name",name);
@@ -84,6 +92,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     public void delete(Department model) throws SQLException
     {
+        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.delete(model);
@@ -97,6 +106,8 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     /** @deprecated */
     public void add(Department model) throws SQLException {
+
+        Session session = sessionFactory.openSession();
        try {
             session.beginTransaction();
             session.save(model);
@@ -112,6 +123,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
     /** @deprecated */
     public void update(Department model) throws SQLException {
 
+        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.update(model);
@@ -126,6 +138,7 @@ public class DepartmentDaoImpl implements DepartmentDao{
 
     public void saveOrUpdate(Department model) throws SQLException {
 
+        Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.merge(model);

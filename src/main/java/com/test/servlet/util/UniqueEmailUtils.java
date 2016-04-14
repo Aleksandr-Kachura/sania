@@ -7,15 +7,19 @@ import com.test.servlet.service.EmployeeService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
 import net.sf.oval.constraint.CheckWithCheck;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 
 /**
  * Created on 08.04.16.
  */
+@Component
 public class UniqueEmailUtils implements CheckWithCheck.SimpleCheck {
 
-    private EmployeeService emplService = new EmployeeServiceImpl();
+    @Autowired
+    private EmployeeServiceImpl emplService ;
 
     public boolean isSatisfied(Object validatedObject, Object value)
     {

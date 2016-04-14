@@ -7,18 +7,24 @@ import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Employee;
 import com.test.servlet.service.EmployeeService;
 import com.test.servlet.util.ValidatorUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
 
-
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeDao employeeDao = new EmployeeDaoImpl();
+    @Autowired
+    private EmployeeDaoImpl employeeDao ;
 
 
     private ValidatorUtils util = new ValidatorUtils();
 
+    @Override
+    @Transactional(readOnly = true)
     public List<Employee> findAllEmployee(int id) throws SQLException {
         return employeeDao.findAllEmployee(id);
     }
@@ -29,6 +35,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDao.add(empl);
     }
 
+    @Override
+    @Transactional
     public void delete(Employee empl) throws SQLException {
         employeeDao.delete(empl);
     }
@@ -38,14 +46,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDao.update(empl);
     }
 
+    @Override
+    @Transactional
     public Employee findEmployeeById(int id) throws SQLException {
         return employeeDao.findEmployeeById(id);
     }
 
+    @Override
+    @Transactional
     public Employee findEmployeeByEmail(String email) throws SQLException {
         return employeeDao.findEmployeeByEmail(email);
     }
 
+    @Override
+    @Transactional
     public void saveOrUpdate(Employee empl) throws SQLException, ValidationException
     {
         util.validate(empl);
