@@ -10,11 +10,8 @@ public interface DepartmentService {
 
     List<Department> findAll() throws SQLException;
 
-    void add(Department dep) throws SQLException, ValidationException;
-
     void delete(Department dep) throws SQLException;
 
-    void update(Department dep) throws SQLException, ValidationException;
 
     void saveOrUpdate(Department dep) throws SQLException, ValidationException;
 

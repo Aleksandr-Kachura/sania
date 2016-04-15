@@ -7,7 +7,7 @@ import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AnnotationsConfigurer;
 import net.sf.oval.context.FieldContext;
 import net.sf.oval.context.OValContext;
-import net.sf.oval.integration.spring.BeanInjectingCheckInitializationListener;
+import net.sf.oval.integration.spring.SpringCheckInitializationListener;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -16,11 +16,12 @@ import java.util.Map;
 
 public class ValidatorUtils {
 
-    //private Validator validator = new Validator();
+
 
     public void validate(Object o) throws ValidationException {
         AnnotationsConfigurer myConfigurer = new AnnotationsConfigurer();
-        myConfigurer.addCheckInitializationListener(BeanInjectingCheckInitializationListener.INSTANCE);
+        //SpringCheckInitializationListener - add spring service to Oval Conf
+        myConfigurer.addCheckInitializationListener(SpringCheckInitializationListener.INSTANCE);
         Validator validator = new Validator(myConfigurer);
         List<ConstraintViolation> violations = validator.validate(o);
         Map<String, String> map = new HashMap<String, String>();

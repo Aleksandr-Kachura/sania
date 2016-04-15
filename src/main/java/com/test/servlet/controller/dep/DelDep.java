@@ -3,7 +3,6 @@ package com.test.servlet.controller.dep;
 
 import com.test.servlet.controller.InternalController;
 import com.test.servlet.model.Department;
-import com.test.servlet.service.DepartmentService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,21 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+
 @Controller(value = "/delDep")
 public class DelDep implements InternalController {
 
 
     @Autowired
-    private DepartmentServiceImpl depServ  ;
+    private DepartmentServiceImpl depServ;
 
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Department dep = new Department();
+            Department dep;
             int id = Integer.parseInt((request.getParameter("id")));
-            dep.setId(id);
+            dep = depServ.findDepartmentById(id);
             depServ.delete(dep);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         response.sendRedirect("/showAllDep");

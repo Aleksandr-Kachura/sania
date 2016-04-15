@@ -1,7 +1,6 @@
 package com.test.servlet.service.impl;
 
 
-import com.test.servlet.dao.EmployeeDao;
 import com.test.servlet.dao.impl.hiber.EmployeeDaoImpl;
 import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Employee;
@@ -18,7 +17,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    private EmployeeDaoImpl employeeDao ;
+    private EmployeeDaoImpl employeeDao;
 
 
     private ValidatorUtils util = new ValidatorUtils();
@@ -29,21 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.findAllEmployee(id);
     }
 
-    /** @deprecated */
-    public void add(Employee empl) throws SQLException, ValidationException {
-        util.validate(empl);
-        employeeDao.add(empl);
-    }
+
 
     @Override
     @Transactional
     public void delete(Employee empl) throws SQLException {
         employeeDao.delete(empl);
-    }
-    /** @deprecated */
-    public void update(Employee empl) throws SQLException, ValidationException  {
-        util.validate(empl);
-        employeeDao.update(empl);
     }
 
     @Override
@@ -60,8 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void saveOrUpdate(Employee empl) throws SQLException, ValidationException
-    {
+    public void saveOrUpdate(Employee empl) throws SQLException, ValidationException {
         util.validate(empl);
         employeeDao.saveOrUpdate(empl);
     }

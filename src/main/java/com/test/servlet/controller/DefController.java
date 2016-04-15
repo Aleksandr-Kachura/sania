@@ -1,8 +1,7 @@
 package com.test.servlet.controller;
 
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -2,18 +2,16 @@ package com.test.servlet.model;
 
 
 import com.test.servlet.util.UniqueEmailUtils;
-import com.test.servlet.util.UniqueUtils;
 import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.DateRange;
 import net.sf.oval.constraint.Email;
 import net.sf.oval.constraint.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name="employee")
-public class Employee  {
+@Entity(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +19,7 @@ public class Employee  {
     private Integer id;
 
     @Column(name = "depId")
-    private  Integer depId;
+    private Integer depId;
 
     @NotEmpty(message = "FirstName is empty")
     @Column(name = "firstName")
@@ -32,14 +30,14 @@ public class Employee  {
     private String secondName;
 
 
-    @DateRange( format = "MM/DD/YYYY", message="Invalid Format", min="01/01/1900",max = "now")
+    @DateRange(format = "MM/DD/YYYY", message = "Invalid Format", min = "01/01/1900", max = "now")
     @Column(name = "birthday")
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
     @NotEmpty(message = "Email is empty")
     @Email(message = "Invalid format")
-    @CheckWith(value = UniqueEmailUtils.class,message = "Not Unique")
+    @CheckWith(value = UniqueEmailUtils.class, message = "Not Unique")
     @Column(name = "email")
     private String email;
 
@@ -95,7 +93,6 @@ public class Employee  {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-
 
 
 }

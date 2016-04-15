@@ -35,7 +35,8 @@
                         <form method="post" action="/delEmpl">
                             <input type="hidden" name="id" value=${empl.id}>
                             <input type="hidden" name="depId" value=${depId}>
-                            <input type="submit" class="btn btn-danger" v value="Delete">
+                            <input type="hidden" name="object" value=${empl}>
+                            <input type="submit" class="btn btn-danger"  value="Delete">
                         </form>
                     </td>
                     <td>

@@ -9,13 +9,23 @@ import java.util.List;
 public interface DepartmentDao {
 
     List<Department> findAll() throws SQLException;
+
     Department findDepartmentById(int id) throws SQLException;
+
     Department findDepartmentByName(String name) throws SQLException;
-    /** @deprecated */
+
+    /**
+     * @deprecated
+     */
     void add(Department model) throws SQLException;
-    /** @deprecated */
+
+    /**
+     * @deprecated
+     */
     void update(Department model) throws SQLException;
+
     void saveOrUpdate(Department model) throws SQLException;
+
     void delete(Department model) throws SQLException;
 
 

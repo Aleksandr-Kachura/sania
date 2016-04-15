@@ -3,16 +3,15 @@ package com.test.servlet.util;
 
 import org.springframework.stereotype.Component;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 @Component
 public class ParseUtils {
 
-    private   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    public  Date parse(String date)
+    public Date parse(String date)
     {
         Date birthday = new Date();
         try {
@@ -20,6 +19,7 @@ public class ParseUtils {
             return birthday;
 
         }catch (ParseException e) {
+            e.printStackTrace();
 
         }
         return birthday;

@@ -3,7 +3,7 @@ package com.test.servlet.exception;
 
 import java.util.Map;
 
-public class ValidationException  extends Exception {
+public class ValidationException extends Exception {
 
     private Map<String, String> error;
 
@@ -14,12 +14,6 @@ public class ValidationException  extends Exception {
     public Map<String, String> getError() {
         return error;
     }
-
-
-
-
-
-
 
 
 }

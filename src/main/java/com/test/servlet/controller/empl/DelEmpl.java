@@ -2,9 +2,7 @@ package com.test.servlet.controller.empl;
 
 
 import com.test.servlet.controller.InternalController;
-import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
-import com.test.servlet.service.EmployeeService;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,20 +17,19 @@ import java.sql.SQLException;
 public class DelEmpl implements InternalController {
 
 
-
     @Autowired
     private EmployeeServiceImpl emplServ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt((request.getParameter("id")));
-           try {
-            Employee empl = new Employee();
-            empl.setId(id);
+        try {
+            Employee empl;
+            empl = emplServ.findEmployeeById(id);
             emplServ.delete(empl);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        String url ="/showAllEmpl?depId="+request.getParameter("depId");
+        String url = "/showAllEmpl?depId=" + request.getParameter("depId");
         response.sendRedirect(url);
     }
 }

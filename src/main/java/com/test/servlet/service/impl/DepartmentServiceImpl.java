@@ -1,6 +1,5 @@
 package com.test.servlet.service.impl;
 
-import com.test.servlet.dao.DepartmentDao;
 import com.test.servlet.dao.impl.hiber.DepartmentDaoImpl;
 import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Department;
@@ -19,7 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private ValidatorUtils util = new ValidatorUtils();
 
     @Autowired
-    private DepartmentDaoImpl departmentDao ;
+    private DepartmentDaoImpl departmentDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -36,15 +35,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     @Transactional(readOnly = true)
     public Department findDepartmentByName(String name) throws SQLException {
-        return departmentDao.findDepartmentByName(name.toString());
+        return departmentDao.findDepartmentByName(name);
     }
-    /** @deprecated */
-    @Override
-    @Transactional
-    public void add(Department dep) throws SQLException, ValidationException {
-        util.validate(dep);
-        departmentDao.add(dep);
-    }
+
 
     @Override
     @Transactional
@@ -52,18 +45,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentDao.delete(dep);
     }
 
-    /** @deprecated */
-    @Override
-    @Transactional
-    public void update(Department dep) throws SQLException, ValidationException {
-        util.validate(dep);
-        departmentDao.update(dep);
-    }
 
     @Override
     @Transactional
-    public void saveOrUpdate(Department dep) throws SQLException, ValidationException
-    {
+    public void saveOrUpdate(Department dep) throws SQLException, ValidationException {
         util.validate(dep);
         departmentDao.saveOrUpdate(dep);
     }

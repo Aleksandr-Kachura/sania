@@ -1,8 +1,6 @@
 package com.test.servlet.controller.dep;
 
 import com.test.servlet.controller.InternalController;
-import com.test.servlet.model.Department;
-import com.test.servlet.service.DepartmentService;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @Controller(value = "/showAllDep")
 public class ShowAllDep implements InternalController {
