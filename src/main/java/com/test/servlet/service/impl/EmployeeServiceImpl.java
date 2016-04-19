@@ -23,7 +23,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private ValidatorUtils util = new ValidatorUtils();
 
     @Override
-    @Transactional(readOnly = true)
     public List<Employee> findAllEmployee(int id) throws SQLException {
         return employeeDao.findAllEmployee(id);
     }
@@ -31,26 +30,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    @Transactional
-    public void delete(Employee empl) throws SQLException {
+     public void delete(Employee empl) throws SQLException {
         employeeDao.delete(empl);
     }
 
     @Override
-    @Transactional
-    public Employee findEmployeeById(int id) throws SQLException {
+       public Employee findEmployeeById(int id) throws SQLException {
         return employeeDao.findEmployeeById(id);
     }
 
     @Override
-    @Transactional
-    public Employee findEmployeeByEmail(String email) throws SQLException {
+       public Employee findEmployeeByEmail(String email) throws SQLException {
         return employeeDao.findEmployeeByEmail(email);
     }
 
     @Override
-    @Transactional
-    public void saveOrUpdate(Employee empl) throws SQLException, ValidationException {
+     public void saveOrUpdate(Employee empl) throws SQLException, ValidationException {
         util.validate(empl);
         employeeDao.saveOrUpdate(empl);
     }

@@ -22,7 +22,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> findAllEmployee(int id) throws SQLException {
         Session session = sessionFactory.openSession();
 
-        Query query = session.createQuery("from employee where depId= :depId");
+        Query query = session.createQuery("from Employee where depId= :depId");
         query.setParameter("depId", id);
         List<Employee> employees = query.list();
         return employees;
@@ -81,7 +81,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Employee findEmployeeById(int id) throws SQLException {
         Employee employee = new Employee();
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("from employee where id= :id");
+        Query query = session.createQuery("from Employee where id= :id");
         query.setParameter("id", id);
         if ((Employee) query.uniqueResult() != null) {
 
@@ -95,7 +95,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Employee employee = new Employee();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query query = session.createQuery("from employee where email= :email");
+        Query query = session.createQuery("from Employee where email= :email");
         query.setParameter("email", email);
         if ((Employee) query.uniqueResult() != null) {
 

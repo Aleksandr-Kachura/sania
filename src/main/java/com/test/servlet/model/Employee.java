@@ -10,7 +10,8 @@ import net.sf.oval.constraint.NotEmpty;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "employee")
+@Entity
+@Table(name = "employee")
 public class Employee {
 
     @Id
@@ -18,8 +19,9 @@ public class Employee {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "depId")
-    private Integer depId;
+    @ManyToOne
+    @JoinColumn(name = "depId")
+    private Department department;
 
     @NotEmpty(message = "FirstName is empty")
     @Column(name = "firstName")
@@ -49,12 +51,12 @@ public class Employee {
         this.email = email;
     }
 
-    public int getDepId() {
-        return depId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepId(int depId) {
-        this.depId = depId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getFirstName() {
@@ -80,11 +82,6 @@ public class Employee {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public void setDepId(Integer depId) {
-        this.depId = depId;
-    }
-
 
     public Date getBirthday() {
         return birthday;

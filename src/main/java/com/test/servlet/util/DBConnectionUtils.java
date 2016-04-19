@@ -19,7 +19,7 @@ public class DBConnectionUtils {
     static final String LOGIN = "root";
     static final String PASS = "1";
 
-    public static Connection createConnection(){
+  /*  public static Connection createConnection(){
         try {
             Class.forName(DRIVER);
         }catch (ClassNotFoundException e){
@@ -37,6 +37,6 @@ public class DBConnectionUtils {
             log.error("Connection is NULL in DAO Factory",e);
             return null;
         }
-    }
+    }*/
 
 }

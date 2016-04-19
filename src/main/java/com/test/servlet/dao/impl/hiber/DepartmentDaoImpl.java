@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +21,18 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    public DepartmentDaoImpl(SessionFactory sessionFactory) {
+
+        this.sessionFactory = sessionFactory;
+    }
+
+    private Session currentSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public List<Department> findAll() throws SQLException {
 
         List<Department> departments = new ArrayList<Department>();
@@ -62,17 +76,17 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return department;
     }
 
-
+    @Transactional
     public void delete(Department model) throws SQLException {
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
-            session.delete(model);
-            session.getTransaction().commit();
+       // Session session = sessionFactory.openSession();
+        /*try {
+            session.beginTransaction();*/
+        currentSession().delete(model);
+         /*   session.getTransaction().commit();
 
         } finally {
             session.close();
-        }
+        }*/
     }
 
 
@@ -112,12 +126,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     }
 
+    @Transactional
     public void saveOrUpdate(Department model) throws SQLException {
-        Session session = sessionFactory.openSession();
+        //Session session = sessionFactory.openSession();
 
-        session.beginTransaction();
-        session.merge(model);
-        session.getTransaction().commit();
+        currentSession().merge(model);
+
+
     }
 
 

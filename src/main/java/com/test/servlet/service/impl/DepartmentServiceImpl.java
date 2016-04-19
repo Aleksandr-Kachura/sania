@@ -21,33 +21,30 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDaoImpl departmentDao;
 
     @Override
-    @Transactional(readOnly = true)
+
     public List<Department> findAll() throws SQLException {
         return departmentDao.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Department findDepartmentById(int id) throws SQLException {
         return departmentDao.findDepartmentById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
+
     public Department findDepartmentByName(String name) throws SQLException {
         return departmentDao.findDepartmentByName(name);
     }
 
 
     @Override
-    @Transactional
     public void delete(Department dep) throws SQLException {
         departmentDao.delete(dep);
     }
 
 
     @Override
-    @Transactional
     public void saveOrUpdate(Department dep) throws SQLException, ValidationException {
         util.validate(dep);
         departmentDao.saveOrUpdate(dep);

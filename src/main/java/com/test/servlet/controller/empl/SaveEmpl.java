@@ -2,6 +2,7 @@ package com.test.servlet.controller.empl;
 
 import com.test.servlet.controller.InternalController;
 import com.test.servlet.exception.ValidationException;
+import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
 import com.test.servlet.util.ParseUtils;
@@ -29,13 +30,15 @@ public class SaveEmpl implements InternalController {
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Employee empl = new Employee();
+        Department department = new Department();
+        department.setId(Integer.parseInt((request.getParameter("depId"))));
         empl.setFirstName(request.getParameter("firstName"));
         empl.setSecondName(request.getParameter("secondName"));
 
         Date birthday = parseUtil.parse(request.getParameter("birthday"));
         empl.setEmail(request.getParameter("email"));
         empl.setBirthday(birthday);
-        empl.setDepId(Integer.parseInt((request.getParameter("depId"))));
+        empl.setDepartment(department);
        try {
             if (!request.getParameter("id").isEmpty()) {
                 empl.setId(parseUtil.parseStrToInteger(request.getParameter("id")));
