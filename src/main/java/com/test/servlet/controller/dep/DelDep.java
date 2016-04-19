@@ -24,7 +24,8 @@ public class DelDep implements InternalController {
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Department dep;
-            int id = Integer.parseInt((request.getParameter("id")));
+            String idParam = request.getParameter("id");
+            Integer id = Integer.parseInt(idParam);
             dep = depServ.findDepartmentById(id);
             depServ.delete(dep);
         } catch (SQLException e) {

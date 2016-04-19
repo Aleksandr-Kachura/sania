@@ -21,8 +21,10 @@ public class EditEmpl implements InternalController {
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int id = Integer.parseInt((request.getParameter("id")));
-            int depId = Integer.parseInt((request.getParameter("depId")));
+            String depIdParam = request.getParameter("depId");
+            Integer depId = Integer.parseInt(depIdParam);
+            String idParam = request.getParameter("id");
+            Integer id = Integer.parseInt(idParam);
             request.setAttribute("employee", emplServ.findEmployeeById(id) );
             request.setAttribute("depId", depId );
             request.getRequestDispatcher("empl/create.jsp").forward(request, response);

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> findAllEmployee(int id) throws SQLException;
+    List<Employee> findAllEmployee(Integer id) throws SQLException;
 
 
 
@@ -16,7 +16,7 @@ public interface EmployeeService {
 
     void saveOrUpdate(Employee employee) throws SQLException, ValidationException;
 
-    Employee findEmployeeById(int id) throws SQLException;
+    Employee findEmployeeById(Integer id) throws SQLException;
 
     Employee findEmployeeByEmail(String email) throws SQLException;
 }

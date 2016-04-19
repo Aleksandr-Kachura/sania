@@ -4,6 +4,7 @@ import com.test.servlet.controller.InternalController;
 import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
+import com.test.servlet.service.impl.DepartmentServiceImpl;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
 import com.test.servlet.util.ParseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,33 +27,46 @@ public class SaveEmpl implements InternalController {
     @Autowired
     private ParseUtils parseUtil;
 
+    @Autowired
+    private DepartmentServiceImpl depServ;
+
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Employee empl = new Employee();
-        Department department = new Department();
-        department.setId(Integer.parseInt((request.getParameter("depId"))));
+
+        String depIdParam = request.getParameter("depId");
+        Integer depId = Integer.parseInt(depIdParam);
+        String idParam = request.getParameter("id");
+
+
         empl.setFirstName(request.getParameter("firstName"));
         empl.setSecondName(request.getParameter("secondName"));
-
-        Date birthday = parseUtil.parse(request.getParameter("birthday"));
         empl.setEmail(request.getParameter("email"));
+        Department dep;
+
+        String dateParam = request.getParameter("birthday");
+        Date birthday = parseUtil.parse(dateParam);
+
         empl.setBirthday(birthday);
-        empl.setDepartment(department);
+
        try {
-            if (!request.getParameter("id").isEmpty()) {
-                empl.setId(parseUtil.parseStrToInteger(request.getParameter("id")));
+           dep =depServ.findDepartmentById(depId);
+           empl.setDepartment(dep);
+            if (!idParam.isEmpty()) {
+                Integer id = Integer.parseInt(idParam);
+                empl.setId(id);
             }
             emplServ.saveOrUpdate(empl);
-            String url = "/showAllEmpl?depId=" + request.getParameter("depId");
+            String url = "/showAllEmpl?depId=" + depIdParam;
             response.sendRedirect(url);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ValidationException e) {
             Map<String, String> error = e.getError();
             request.setAttribute("error", error);
-            request.setAttribute("depId", request.getParameter("depId"));
-            request.setAttribute("id", request.getParameter("id"));
+            request.setAttribute("depId", depIdParam);
+            request.setAttribute("id", idParam);
             request.setAttribute("employee", empl);
             request.getRequestDispatcher("empl/create.jsp").forward(request, response);
         }

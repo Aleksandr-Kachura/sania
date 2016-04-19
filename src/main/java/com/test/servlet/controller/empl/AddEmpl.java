@@ -14,7 +14,8 @@ public class AddEmpl implements InternalController {
 
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int depId = Integer.parseInt((request.getParameter("depId")));
+        String depIdParam = request.getParameter("depId");
+        Integer depId = Integer.parseInt(depIdParam);
         request.setAttribute("depId", depId);
         request.getRequestDispatcher("empl/create.jsp").forward(request, response);
     }

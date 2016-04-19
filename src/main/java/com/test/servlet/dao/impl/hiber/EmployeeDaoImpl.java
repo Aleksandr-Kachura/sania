@@ -19,71 +19,35 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<Employee> findAllEmployee(int id) throws SQLException {
-        Session session = sessionFactory.openSession();
+    @Autowired
+    public EmployeeDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
-        Query query = session.createQuery("from Employee where depId= :depId");
+    private Session currentSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public List<Employee> findAllEmployee(Integer id) throws SQLException {
+        Query query = currentSession().createQuery("from Employee where department.id= :depId");
         query.setParameter("depId", id);
         List<Employee> employees = query.list();
         return employees;
     }
 
     public void delete(Employee model) throws SQLException {
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
-            session.load(Employee.class, model.getId());
-            session.delete(model);
-            session.getTransaction().commit();
-        } finally {
-
-
-            session.close();
-        }
-    }
-
-    /**
-     * @deprecated
-     */
-    public void add(Employee model) throws SQLException {
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
-            session.load(Employee.class, model.getId());
-            session.save(model);
-            session.getTransaction().commit();
-        } finally {
-            session.close();
-        }
-
-    }
-
-    /**
-     * @deprecated
-     */
-    public void update(Employee employee) throws SQLException {
-
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
-            session.load(Employee.class, employee.getId());
-            session.update(employee);
-            session.getTransaction().commit();
-        } finally {
-
-
-            session.close();
-        }
-
+        currentSession().delete(model);
     }
 
 
-    public Employee findEmployeeById(int id) throws SQLException {
+
+    public Employee findEmployeeById(Integer id) throws SQLException {
         Employee employee = new Employee();
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery("from Employee where id= :id");
+        Query query = currentSession().createQuery("from Employee where id= :id");
         query.setParameter("id", id);
-        if ((Employee) query.uniqueResult() != null) {
+        if (query.uniqueResult() != null) {
 
             employee = (Employee) query.uniqueResult();
         }
@@ -93,28 +57,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     public Employee findEmployeeByEmail(String email) throws SQLException {
         Employee employee = new Employee();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from Employee where email= :email");
+
+        Query query = currentSession().createQuery("from Employee where email= :email");
         query.setParameter("email", email);
-        if ((Employee) query.uniqueResult() != null) {
+        if (query.uniqueResult() != null) {
 
             employee = (Employee) query.uniqueResult();
         }
-        session.getTransaction().commit();
-        return employee;
+         return employee;
     }
 
     public void saveOrUpdate(Employee employee) throws SQLException {
-        Session session = sessionFactory.openSession();
-        try {
-            session.beginTransaction();
-            session.saveOrUpdate(employee);
-            session.getTransaction().commit();
 
-        } finally {
-            session.close();
-        }
+        currentSession().merge(employee);
 
     }
 

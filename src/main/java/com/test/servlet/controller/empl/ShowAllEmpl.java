@@ -2,6 +2,8 @@ package com.test.servlet.controller.empl;
 
 
 import com.test.servlet.controller.InternalController;
+import com.test.servlet.model.Department;
+import com.test.servlet.service.impl.DepartmentServiceImpl;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +22,11 @@ public class ShowAllEmpl implements InternalController {
     private EmployeeServiceImpl emplServ;
 
 
+
+
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int depId = Integer.parseInt((request.getParameter("depId")));
+        String depIdParam = request.getParameter("depId");
+        Integer depId = Integer.parseInt(depIdParam);
         try {
             request.setAttribute("depId", depId);
             request.setAttribute("employees", emplServ.findAllEmployee(depId));

@@ -21,9 +21,10 @@ public class DelEmpl implements InternalController {
     private EmployeeServiceImpl emplServ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt((request.getParameter("id")));
+        String idParam = request.getParameter("id");
+        Integer id = Integer.parseInt(idParam);
+        Employee empl;
         try {
-            Employee empl;
             empl = emplServ.findEmployeeById(id);
             emplServ.delete(empl);
         } catch (SQLException e) {

@@ -23,10 +23,12 @@ public class SaveDep implements InternalController {
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Department dep = new Department();
+        String idParam = request.getParameter("id");
         dep.setName(request.getParameter("name").trim());
         try {
-            if (!request.getParameter("id").isEmpty()) {
-                dep.setId(Integer.valueOf(request.getParameter("id")));
+            if (!idParam.isEmpty()) {
+                Integer id = Integer.parseInt(idParam);
+                dep.setId(id);
             }
             depServ.saveOrUpdate(dep);
         } catch (SQLException e) {

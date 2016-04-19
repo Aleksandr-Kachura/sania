@@ -25,16 +25,5 @@ public class ParseUtils {
         return birthday;
     }
 
-    public Integer parseStrToInteger(String id)
-    {
-        Integer integer;
-        try{
-            integer  = Integer.parseInt(id);
-        }
-        catch (NumberFormatException e){
-            integer = null;
-        }
-        return  integer;
-    }
 
 }
