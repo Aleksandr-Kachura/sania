@@ -50,9 +50,10 @@ public class SaveEmpl implements InternalController {
 
         empl.setBirthday(birthday);
 
-       try {
-           dep =depServ.findDepartmentById(depId);
-           empl.setDepartment(dep);
+        try {
+            dep = depServ.findDepartmentById(depId);
+            empl.setDepartment(dep);
+
             if (!idParam.isEmpty()) {
                 Integer id = Integer.parseInt(idParam);
                 empl.setId(id);
@@ -61,7 +62,7 @@ public class SaveEmpl implements InternalController {
             String url = "/showAllEmpl?depId=" + depIdParam;
             response.sendRedirect(url);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ServletException(e.getMessage());
         } catch (ValidationException e) {
             Map<String, String> error = e.getError();
             request.setAttribute("error", error);

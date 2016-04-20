@@ -1,6 +1,7 @@
 package com.test.servlet.util;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -8,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 @Component
 public class ParseUtils {
+
+    private Logger log = Logger.getLogger(UniqueUtils.class.getName());
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -19,7 +22,7 @@ public class ParseUtils {
             return birthday;
 
         }catch (ParseException e) {
-            e.printStackTrace();
+            log.error("Problem with date");
 
         }
         return birthday;

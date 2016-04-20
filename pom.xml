@@ -26,7 +26,8 @@
 
   <dependencies>
 
-    <dependency>
+   <!-- App testing System -->
+   <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
@@ -53,6 +54,8 @@
       <!--<version>${hibernate.commons.version}</version>-->
     <!--</dependency>-->
 
+
+    <!-- Hibernate -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -69,6 +72,8 @@
       <version>${org.springframework.version}</version>
     </dependency>
 
+
+      <!--Spring context for autoscan pom-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -81,35 +86,37 @@
       <version>${org.springframework.version}</version>
     </dependency>
 
+
+     <!--Spring bean for declary Bean and Component pom-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
       <version>${org.springframework.version}</version>
     </dependency>
 
-    <dependency>
+
+     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
       <version>${org.springframework.version}</version>
     </dependency>
 
+     <!--ORM integration with hiber-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
       <version>${org.springframework.version}</version>
     </dependency>
 
+
+
+      <!--For trascantional manager-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
       <version>${org.springframework.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>commons-dbcp</groupId>
-      <artifactId>commons-dbcp</artifactId>
-      <version>1.2.2</version>
-    </dependency>
 
 
 
@@ -137,14 +144,16 @@
     </dependency>
 
   </dependencies>
+
   <build>
     <finalName>Sania</finalName>
     <plugins>
-
+      <!--  The Compiler Plugin is used to compile the sources of your proje-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.1</version>
+          <!--  Support java 1.6-->
         <configuration>
           <target>1.6</target>
           <source>1.6</source>

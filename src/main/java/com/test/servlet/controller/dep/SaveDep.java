@@ -30,15 +30,17 @@ public class SaveDep implements InternalController {
                 Integer id = Integer.parseInt(idParam);
                 dep.setId(id);
             }
+
             depServ.saveOrUpdate(dep);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ServletException(e.getMessage());
+
         } catch (ValidationException e) {
             Map<String, String> error = e.getError();
             request.setAttribute("error", error);
             request.setAttribute("department", dep);
-            request.getRequestDispatcher("dep/create.jsp").forward(request, response);
+            request.getRequestDispatcher("dep/create.jsp").forward(request, response); //for at
         }
-        response.sendRedirect("/showAllDep");
+        response.sendRedirect("/showAllDep"); //no prepare contpath
     }
 }

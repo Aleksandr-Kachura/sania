@@ -35,7 +35,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     @Transactional
     public Department findDepartmentByName(String name) throws SQLException {
-        return departmentDao.findDepartmentByName(name);
+
+          return departmentDao.findDepartmentByName(name);
     }
 
 
@@ -52,5 +53,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         util.validate(dep);
         departmentDao.saveOrUpdate(dep);
     }
+
 
 }

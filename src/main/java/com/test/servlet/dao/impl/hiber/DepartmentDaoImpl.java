@@ -30,7 +30,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") //kill warning transform list
     public List<Department> findAll() throws SQLException {
         List<Department> departments;
         departments = currentSession().createCriteria(Department.class).list();
@@ -66,12 +66,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     public void delete(Department model) throws SQLException {
         currentSession().delete(model);
+
     }
 
 
     public void saveOrUpdate(Department model) throws SQLException {
-        currentSession().merge(model);
+      currentSession().merge(model);
+
     }
+
+
 
 
 }

@@ -15,14 +15,14 @@ import java.sql.SQLException;
 public class ShowAllDep implements InternalController {
 
     @Autowired
-    private DepartmentServiceImpl depServ  ;
+    private DepartmentServiceImpl depServ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setAttribute("departments", depServ.findAll() );
+            request.setAttribute("departments", depServ.findAll());
             request.getRequestDispatcher("dep/all.jsp").forward(request, response);
-        }catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new ServletException(e.getMessage());
         }
 
     }

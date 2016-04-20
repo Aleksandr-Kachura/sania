@@ -23,11 +23,11 @@ public class ValidatorUtils {
         //SpringCheckInitializationListener - add spring service to Oval Conf
         myConfigurer.addCheckInitializationListener(SpringCheckInitializationListener.INSTANCE);
         Validator validator = new Validator(myConfigurer);
-        List<ConstraintViolation> violations = validator.validate(o);
+        List<ConstraintViolation> violations = validator.validate(o); //provides detailed information about a single constraint
         Map<String, String> map = new HashMap<String, String>();
         if (violations.size() > 0) {
             for (ConstraintViolation cs : violations) {
-                OValContext c = cs.getContext();
+                OValContext c = cs.getContext(); // Returns the context where the constraint violation occurred.
                 if (c instanceof FieldContext) {
                     Field field = ((FieldContext) c).getField();
                     map.put(field.getName(), cs.getMessage());

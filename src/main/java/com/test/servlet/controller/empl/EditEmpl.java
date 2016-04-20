@@ -2,6 +2,7 @@ package com.test.servlet.controller.empl;
 
 
 import com.test.servlet.controller.InternalController;
+import com.test.servlet.model.Employee;
 import com.test.servlet.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,17 +21,24 @@ public class EditEmpl implements InternalController {
     private EmployeeService emplServ ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String depIdParam = request.getParameter("depId");
-            Integer depId = Integer.parseInt(depIdParam);
-            String idParam = request.getParameter("id");
+
+        String depIdParam = request.getParameter("depId");
+        Integer depId = Integer.parseInt(depIdParam);
+        String idParam = request.getParameter("id");
+        if (!idParam.isEmpty()) {
             Integer id = Integer.parseInt(idParam);
-            request.setAttribute("employee", emplServ.findEmployeeById(id) );
-            request.setAttribute("depId", depId );
-            request.getRequestDispatcher("empl/create.jsp").forward(request, response);
-        }catch (SQLException e) {
-            e.printStackTrace();
+            Employee employee ;
+            try {
+                employee = emplServ.findEmployeeById(id);
+                request.setAttribute("employee",employee  );
+                request.setAttribute("depId", depId );
+                request.getRequestDispatcher("empl/create.jsp").forward(request, response);
+            }catch (SQLException e) {
+                throw new ServletException(e.getMessage());
+            }
         }
+        request.getRequestDispatcher("empl/create.jsp").forward(request, response);
+
 
     }
 }

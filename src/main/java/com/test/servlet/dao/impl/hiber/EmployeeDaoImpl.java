@@ -33,8 +33,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<Employee> findAllEmployee(Integer id) throws SQLException {
         Query query = currentSession().createQuery("from Employee where department.id= :depId");
         query.setParameter("depId", id);
-        List<Employee> employees = query.list();
-        return employees;
+      //  List<Employee> employees = query.list();
+        return query.list();
     }
 
     public void delete(Employee model) throws SQLException {
@@ -59,11 +59,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Employee employee = new Employee();
 
         Query query = currentSession().createQuery("from Employee where email= :email");
+
         query.setParameter("email", email);
         if (query.uniqueResult() != null) {
 
             employee = (Employee) query.uniqueResult();
         }
+
          return employee;
     }
 
@@ -72,6 +74,5 @@ public class EmployeeDaoImpl implements EmployeeDao {
         currentSession().merge(employee);
 
     }
-
 
 }

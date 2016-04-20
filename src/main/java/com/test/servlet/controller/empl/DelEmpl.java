@@ -28,7 +28,7 @@ public class DelEmpl implements InternalController {
             empl = emplServ.findEmployeeById(id);
             emplServ.delete(empl);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ServletException(e.getMessage());
         }
         String url = "/showAllEmpl?depId=" + request.getParameter("depId");
         response.sendRedirect(url);

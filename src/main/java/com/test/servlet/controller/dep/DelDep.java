@@ -22,15 +22,18 @@ public class DelDep implements InternalController {
 
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Department dep;
+        String idParam = request.getParameter("id");
+        Integer id = Integer.parseInt(idParam);
         try {
-            Department dep;
-            String idParam = request.getParameter("id");
-            Integer id = Integer.parseInt(idParam);
             dep = depServ.findDepartmentById(id);
             depServ.delete(dep);
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ServletException(e.getMessage());
         }
+
+
         response.sendRedirect("/showAllDep");
     }
 }

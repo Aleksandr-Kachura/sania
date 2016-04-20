@@ -2,6 +2,7 @@ package com.test.servlet.controller.dep;
 
 
 import com.test.servlet.controller.InternalController;
+import com.test.servlet.model.Department;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,17 +17,21 @@ import java.sql.SQLException;
 public class EditDep implements InternalController {
 
     @Autowired
-    private DepartmentServiceImpl depServ  ;
+    private DepartmentServiceImpl depServ;
 
     public void doService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String idParam = request.getParameter("id");
+        String idParam = request.getParameter("id");
+        if (!idParam.isEmpty()) {
             Integer id = Integer.parseInt(idParam);
-            request.setAttribute("department", depServ.findDepartmentById(id) );
-            request.getRequestDispatcher("dep/create.jsp").forward(request, response);
-        }catch (SQLException e) {
-            e.printStackTrace();
+            Department department = null;
+            try {
+                department = depServ.findDepartmentById(id);
+            } catch (SQLException e) {
+                throw new ServletException(e.getMessage());
+            }
+            request.setAttribute("department", department);
         }
+        request.getRequestDispatcher("dep/create.jsp").forward(request, response);
 
     }
 }

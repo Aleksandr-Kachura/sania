@@ -5,9 +5,9 @@
 <html>
 <head>
        <title>Add new user</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
 </head>
-</head>
+
 <body background="../res/img/406821.jpg">
 <div class="container">
     <div class="col-md-6">
@@ -20,7 +20,7 @@
 
                 <p style="color: red"> ${error.get("name")}</p>
             </fieldset>
-            <input type="hidden" name="id" value="<c:out value="${department.id}" />">
+            <input type="hidden" name="id" value="<c:out value="${department.id}" />"> <!-- c.out protect input-->
             <button type="submit"  class="btn btn-primary">Submit</button>
         </form>
      </div>
