@@ -118,8 +118,6 @@
           <version>${org.springframework.version}</version>
       </dependency>
 
-
-
       <!-- mySql JDBC -->
     <dependency>
       <groupId>mysql</groupId>
@@ -133,14 +131,14 @@
       <artifactId>oval</artifactId>
       <version>${oval.version}</version>
     </dependency>
+      <!-- Loger -->
 
-    <!-- Loger -->
+      <dependency>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+          <version>1.2.17</version>
+      </dependency>
 
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
 
   </dependencies>
     <build>

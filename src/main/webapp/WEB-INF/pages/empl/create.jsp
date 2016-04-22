@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +11,7 @@
 <body background="../res/img/406821.jpg">
 <div class="container">
     <div class="col-md-6">
-<form:form method="post" action="/employeeSaveOrUpdate" modelAttribute="employee">
+<form method="post" action="/employeeSaveOrUpdate" >
             <fieldset class="form-group" >
                 <p>firstName :</p>  <input type="text" name="firstName" value="<c:out value="${employee.firstName}" />" /> <br/>
                 <p style="color: red"> ${error.get("firstName")}</p>
@@ -28,7 +28,7 @@
                 <input type="hidden" name="id" value="<c:out value="${employee.id}" />">
                 <input type="submit" value="Submit" />
             </fieldset>
-</form:form>
+</form>
     </div>
 </div>
 </body>

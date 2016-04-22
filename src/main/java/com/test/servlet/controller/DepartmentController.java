@@ -64,7 +64,7 @@ public class DepartmentController {
     }
 
     @RequestMapping(value = "/depSaveOrUpdate", method = RequestMethod.POST)
-    public ModelAndView addNewOne(@ModelAttribute Department department) throws SQLException
+    public ModelAndView addNewOne( Department department) throws SQLException
     {
        try {
             depServ.saveOrUpdate(department);

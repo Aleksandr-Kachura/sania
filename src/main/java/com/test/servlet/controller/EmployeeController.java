@@ -73,7 +73,7 @@ public class EmployeeController {
 
 
     @RequestMapping(value = "/employeeSaveOrUpdate")
-    public ModelAndView employeeSaveOrUpdate(@ModelAttribute Employee employee, @RequestParam(required = true) Integer depId) throws  SQLException
+    public ModelAndView employeeSaveOrUpdate(Employee employee, @RequestParam(required = true) Integer depId) throws  SQLException
     {
         Employee empl = employee;
         ModelAndView modelAndView ;
