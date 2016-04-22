@@ -40,7 +40,7 @@
                         </form>
                     </td>
                     <td>
-                        <form method="post" action="/editEmpl">
+                        <form method="post" action="/editOrAddEmpl">
                             <input type="hidden" name="id" value=${empl.id}>
                             <input type="hidden" name="depId" value=${depId}>
                             <input type="submit" class="btn btn-success" value="Update">
@@ -52,7 +52,7 @@
             </c:forEach>
             </tbody>
         </table>
-        <td><a href="<c:url value="/addEmpl?depId=${depId}" />">Add Employees</a></td>
+        <td><a href="<c:url value="/editOrAddEmpl?depId=${depId}" />">Add Employees</a></td>
     </div>
 </div>
 

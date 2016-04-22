@@ -6,6 +6,7 @@ import net.sf.oval.constraint.CheckWith;
 import net.sf.oval.constraint.DateRange;
 import net.sf.oval.constraint.Email;
 import net.sf.oval.constraint.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,6 +36,7 @@ public class Employee {
     @DateRange(format = "MM/DD/YYYY", message = "Invalid Format", min = "01/01/1900", max = "now")
     @Column(name = "birthday")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MM/DD/YYYY")
     private Date birthday;
 
     @NotEmpty(message = "Email is empty")

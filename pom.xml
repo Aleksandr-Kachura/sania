@@ -111,7 +111,7 @@
           <version>${org.springframework.version}</version>
       </dependency>
 
-
+       <!-- MVC -->
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-webmvc</artifactId>
@@ -120,9 +120,7 @@
 
 
 
-
-
-    <!-- mySql JDBC -->
+      <!-- mySql JDBC -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
