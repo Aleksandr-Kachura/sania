@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-@Controller(value = "/editEmpl")
+@Controller
 public class EditEmpl implements InternalController {
 
     @Autowired

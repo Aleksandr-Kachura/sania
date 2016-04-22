@@ -8,7 +8,6 @@
     <title>Show All Departments</title>
     <link href="<c:url value="" />" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" >
-   <link href="<c:url value="../res/css/main.css" />" rel="stylesheet">
 </head>
 <body background="../res/img/406821.jpg">
 <div class="container"  >
@@ -33,7 +32,7 @@
                             </form>
                         </td>
                         <td style="padding: 10px">
-                            <form method="post" action="/editDep">
+                            <form method="post" action="/editOrAddDep">
                                 <input type="hidden" name="id" value=${dep.id}>
                                 <input class="btn btn-success" type="submit" value="Update">
                             </form>
@@ -44,7 +43,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <p><a href="/addDep">Add Department</a></p>
+            <p><a href="/editOrAddDep">Add Department</a></p>
     </div>
 </div>
 

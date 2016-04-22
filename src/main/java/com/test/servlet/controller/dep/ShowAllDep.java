@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@Controller(value = "/showAllDep")
+@Controller
 public class ShowAllDep implements InternalController {
 
     @Autowired

@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Map;
 
-@Controller(value = "/saveEmpl")
+@Controller
 public class SaveEmpl implements InternalController {
 
     @Autowired

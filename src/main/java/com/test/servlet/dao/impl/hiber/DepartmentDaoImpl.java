@@ -29,7 +29,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return sessionFactory.getCurrentSession();
     }
 
-    @Override
+
     @SuppressWarnings("unchecked") //kill warning transform list
     public List<Department> findAll() throws SQLException {
         List<Department> departments;

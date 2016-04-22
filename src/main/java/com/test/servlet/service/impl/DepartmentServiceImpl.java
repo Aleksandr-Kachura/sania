@@ -20,19 +20,19 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentDaoImpl departmentDao;
 
-    @Override
+
     @Transactional
     public List<Department> findAll() throws SQLException {
         return departmentDao.findAll();
     }
 
-    @Override
+
     @Transactional
     public Department findDepartmentById(Integer id) throws SQLException  {
         return departmentDao.findDepartmentById(id);
     }
 
-    @Override
+
     @Transactional
     public Department findDepartmentByName(String name) throws SQLException {
 
@@ -40,14 +40,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
 
-    @Override
+
     @Transactional
     public void delete(Department dep) throws SQLException  {
         departmentDao.delete(dep);
     }
 
 
-    @Override
+
     @Transactional
     public void saveOrUpdate(Department dep) throws SQLException, ValidationException {
         util.validate(dep);

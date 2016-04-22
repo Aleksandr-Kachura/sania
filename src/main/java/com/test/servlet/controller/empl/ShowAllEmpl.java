@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@Controller(value = "/showAllEmpl")
+@Controller
 public class ShowAllEmpl implements InternalController {
 
 

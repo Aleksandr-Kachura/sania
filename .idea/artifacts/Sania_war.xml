@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="Sania:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="Sania.war">
+    <root id="archive" name="Sania-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="Sania:war exploded" />
     </root>
   </artifact>

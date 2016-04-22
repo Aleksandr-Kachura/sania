@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@Controller(value = "/delEmpl")
+@Controller
 public class DelEmpl implements InternalController {
 
 

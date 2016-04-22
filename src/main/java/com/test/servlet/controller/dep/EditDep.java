@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@Controller(value = "/editDep")
+@Controller
 public class EditDep implements InternalController {
 
     @Autowired
