@@ -5,7 +5,6 @@ import com.test.servlet.model.Department;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +27,7 @@ public class DepartmentController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showInd() {
         return new ModelAndView("index");
-    }
+    } //Object ModelAndView provide return both View and Model, return to handler
 
     @RequestMapping(value = "/showAllDep", method = RequestMethod.GET)
     public ModelAndView showAll(HttpServletRequest request) throws SQLException {
@@ -37,11 +36,12 @@ public class DepartmentController {
         return modelAndView;
     }
 
-
+    //@RequestParam from jsp to controller
     @RequestMapping(value = "/delDep", method = RequestMethod.POST)
     public String deleteOne (@RequestParam(required = true) Integer id) throws SQLException {
         String direct = "";
-        direct = "redirect:/showAllDep";
+        direct = "redirect:/showAllDep"; // special char
+
         Department department;
         department = depServ.findDepartmentById(id);
         depServ.delete(department);
@@ -63,6 +63,8 @@ public class DepartmentController {
         return modelAndView;
     }
 
+
+    //Understand Depertment by attribute
     @RequestMapping(value = "/depSaveOrUpdate", method = RequestMethod.POST)
     public ModelAndView addNewOne( Department department) throws SQLException
     {

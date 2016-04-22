@@ -32,7 +32,7 @@ public class EmployeeController {
     private DepartmentServiceImpl depServ;
 
 
-    @InitBinder
+    @InitBinder //for ini WebdataBinder(request parameter to JavaBean objects)
     public void initBinder(WebDataBinder binder)
     {
         binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd"));
