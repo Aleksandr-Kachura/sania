@@ -6,10 +6,12 @@
 <html>
 <head>
        <title>Add new user</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+    <link href="<c:url value="/res/css/main.css" />" rel="stylesheet">
 </head>
 
-<body background="../res/img/406821.jpg">
+<body>
 <div class="container">
     <div class="col-md-6">
         <form method="POST" action='/depSaveOrUpdate' >
@@ -19,7 +21,7 @@
                     type="text" name="name"
                     value="<c:out value="${department.name}" />" /> <br/>
 
-                <p style="color: red"> ${error.get("name")}</p>
+                <p class="error"> ${error.get("name")}</p>
             </fieldset>
             <input type="hidden" name="id" value="<c:out value="${department.id}" />"> <!-- c.out protect input-->
             <button type="submit"  class="btn btn-primary">Submit</button>

@@ -1,3 +1,15 @@
+.error {
+    color: red;
+}
 body{
-
+    background: url("../img/406821.jpg");
+}
+.table .table-sm{
+    background-color: #556b2f;
+ }
+.tabHead{
+    background-color: #deb887;
+}
+.tabBody{
+    background-color: silver;
 }

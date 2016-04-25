@@ -12,7 +12,7 @@
     <!-- Include MVC annotation -->
     <mvc:annotation-driven/>
 
-
+    <mvc:resources mapping="/resources/**" location="/res/" />
 
     <!-- Point Spring MVC where look for Controller -->
     <context:component-scan base-package="com.test.servlet.controller">

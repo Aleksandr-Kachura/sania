@@ -7,25 +7,25 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" >
+    <link href="<c:url value="/res/css/main.css" />" rel="stylesheet">
     <title>Show All Employees</title>
 </head>
-<body background="../res/img/406821.jpg" >
+<body  >
 <div class="container" >
     <div class="row">
         <table border="3" class="table table-sm"  >
             <thead>
-            <tr>
-                <th bgcolor="#deb887">Empl Id</th>
-                <th bgcolor="#deb887" >firstName</th>
-                <th bgcolor="#deb887" >secondName</th>
-                <th bgcolor="#deb887" >birthday</th>
-                <th bgcolor="#deb887" >Email</th>
-                <th bgcolor="#deb887" colspan=2>Action</th>
+            <tr class="tabHead">
+                <th >Empl Id</th>
+                <th >firstName</th>
+                <th  >secondName</th>
+                <th  >birthday</th>
+                <th  >Email</th>
+                <th colspan=2>Action</th>
             </tr>
             </thead>
-            <tbody bgcolor="silver">
             <c:forEach items="${employees}" var="empl">
-                <tr >
+                <tr class="tabBody" >
                     <td><c:out value="${empl.id}" /></td>
                     <td><c:out value="${empl.firstName}" /></td>
                     <td><c:out value="${empl.secondName}" /></td>

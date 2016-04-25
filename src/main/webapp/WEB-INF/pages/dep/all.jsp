@@ -6,32 +6,33 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
     <title>Show All Departments</title>
-    <link href="<c:url value="" />" rel="stylesheet">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" >
+    <link href="<c:url value="/res/css/main.css" />" rel="stylesheet">
 </head>
-<body background="../res/img/406821.jpg">
+<body >
 <div class="container"  >
     <div class="row" >
-            <table class="table table-sm" border="3" bgcolor="#556b2f"  >
+            <table class="table table-sm" border="3" >
                 <thead>
-                <tr>
-                    <th bgcolor="#deb887">Dep Id</th>
-                    <th bgcolor="#deb887">Name</th>
-                    <th bgcolor="#deb887"  colspan=2>Action</th>
+                <tr class="tabHead">
+                    <th >Dep Id</th>
+                    <th >Name</th>
+                    <th colspan="2" >Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${departments}" var="dep">
-                    <tr bgcolor="silver">
+                    <tr class="tabBody" >
                         <td ><c:out  value="${dep.id}" /></td>
                         <td><a  href="<c:url value="/showAllEmpl?depId=${dep.id}" />" >${dep.name}</a></td> <!-- for correcr attrib-->
-                        <td style="padding: 10px">
+                        <td>
                             <form method="post" action="/delDep">
                                 <input type="hidden" name="id" value=${dep.id}>
                                 <input  class="btn btn-danger" type="submit" value="Delete">
                             </form>
                         </td>
-                        <td style="padding: 10px">
+                        <td>
                             <form method="post" action="/editOrAddDep">
                                 <input type="hidden" name="id" value=${dep.id}>
                                 <input class="btn btn-success" type="submit" value="Update">
