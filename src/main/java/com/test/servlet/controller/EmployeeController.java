@@ -32,14 +32,13 @@ public class EmployeeController {
     private DepartmentServiceImpl depServ;
 
 
-    @InitBinder //for ini WebdataBinder(request parameter to JavaBean objects)
-    public void initBinder(WebDataBinder binder)
-    {
+    @InitBinder //for ini WebdataBinder(from request parameter to JavaBean objects)
+    public void initBinder(WebDataBinder binder) {
         binder.addCustomFormatter(new DateFormatter("yyyy-MM-dd"));
     }
 
     @RequestMapping(value = "/showAllEmpl", method = RequestMethod.GET)
-    public ModelAndView showAll (@RequestParam(required = true) Integer depId) throws SQLException {
+    public ModelAndView showAll(@RequestParam(required = true) Integer depId) throws SQLException {
         List<Employee> employees;
         employees = emplServ.findAllEmployee(depId);
         ModelAndView modelAndView = new ModelAndView("/empl/all");
@@ -53,49 +52,40 @@ public class EmployeeController {
     public String deleteOne(@RequestParam(required = true) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
         Employee employee = emplServ.findEmployeeById(id);
         emplServ.delete(employee);
-        return "redirect:/showAllEmpl?depId="+depId;
+        return "redirect:/showAllEmpl?depId=" + depId;
     }
 
     @RequestMapping(value = "/editOrAddEmpl")
-    public ModelAndView editOrAddEmpl(@RequestParam(required = false) Integer id, @RequestParam(required = true) Integer depId) throws SQLException
-    {
+    public ModelAndView editOrAddEmpl(@RequestParam(required = false) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
         ModelAndView modelAndView = new ModelAndView("/empl/create");
         Employee employee = new Employee();
-        if(id != null)
-        {
-            employee = emplServ.findEmployeeById(id);
-
+        if (id != null) {
+               employee = emplServ.findEmployeeById(id);
         }
         modelAndView.addObject("employee", employee);
-        modelAndView.addObject("depId",  depId);
+        modelAndView.addObject("depId", depId);
         return modelAndView;
     }
 
 
     @RequestMapping(value = "/employeeSaveOrUpdate")
-    public ModelAndView employeeSaveOrUpdate(Employee employee, @RequestParam(required = true) Integer depId) throws  SQLException
-    {
-        Employee empl = employee;
-        ModelAndView modelAndView ;
+    public ModelAndView employeeSaveOrUpdate(Employee employee, @RequestParam(required = true) Integer depId) throws SQLException {
+        ModelAndView modelAndView;
         Department department = depServ.findDepartmentById(depId);
-        empl.setDepartment(department);
+        employee.setDepartment(department);
         try {
-
-            emplServ.saveOrUpdate(empl);
-        }
-        catch (ValidationException e)
-        {
+            emplServ.saveOrUpdate(employee);
+        } catch (ValidationException e) {
             modelAndView = new ModelAndView("/empl/create");
             Map<String, String> error = e.getError();
-            modelAndView.addObject("depId",depId);
+            modelAndView.addObject("depId", depId);
             modelAndView.addObject("employee", employee);
             modelAndView.addObject("error", error);
             return modelAndView;
-
         }
 
         modelAndView = new ModelAndView("redirect:/showAllEmpl");
-        modelAndView.addObject("depId",depId);
+        modelAndView.addObject("depId", depId);
         return modelAndView;
     }
 

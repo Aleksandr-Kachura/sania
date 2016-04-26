@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -66,16 +65,14 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     public void delete(Department model) throws SQLException {
         currentSession().delete(model);
-
+        throw new SQLException("Adddddd");
     }
 
 
     public void saveOrUpdate(Department model) throws SQLException {
-      currentSession().merge(model);
+        currentSession().merge(model);
 
     }
-
-
 
 
 }
