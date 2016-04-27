@@ -5,13 +5,11 @@ import com.test.servlet.model.Department;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,11 +28,12 @@ public class DepartmentController {
         return new ModelAndView("index");
     } //Object ModelAndView provide return both View and Model, return to handler
 
-    @RequestMapping(value = "/showAllDep", method = RequestMethod.GET)
-    public ModelAndView showAll() throws SQLException {
-        ModelAndView modelAndView = new ModelAndView("/dep/all");
-        modelAndView.addObject("departments", depServ.findAll());
-        return modelAndView;
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Department> showAll() throws SQLException {
+
+       // modelAndView.addObject("departments", depServ.findAll());
+        return depServ.findAll();
     }
 
     //@RequestParam from jsp to controller
