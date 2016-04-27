@@ -6,11 +6,13 @@ $( document ).ready(function() {
 
     var Ingredients = {
         1: function(){return new DepAll()},
-        2: function(){return new DepOne()}
+        2: function(){return new DepOne()},
+    DelDep:function(){return new DelDep()}
 
     };
 
-    $("#content").on("click",".other", function(){
+    $('body').on("click",".other", function(){
+        console.log($(this).attr('value'));
         var id =  $(this).attr('value');
         Ingredients[id]();
     });
