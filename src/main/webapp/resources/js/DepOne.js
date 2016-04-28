@@ -1,3 +1,5 @@
+
+
 function DepOne() {
        console.log("1");
        $("#content").empty();
@@ -15,8 +17,8 @@ function DepOne() {
                 eTable += "<tr class='tabBody'>";
                 eTable += "<td>"+data[i]['id']+"</td>";
                 eTable += "<td>"+data[i]['name']+"</td>";
-                var button ="<button class='other btn btn-danger ' value='DelDep' id="+data[i]['id']+">Delete</button> ";
-                var button2 ="<button class='other btn btn-success' value='EditDep' id="+data[i]['id']+">Edit</button> ";
+                var button ="<button class='other btn btn-danger ' value='DelDep' name="+data[i]['id']+" >Delete</button> ";
+                var button2 ="<button class='other btn btn-success' value='EditDep' name="+data[i]['id']+" >Edit</button> ";
                 eTable += "<td>"+button+ "</td>";
                 eTable += "<td>"+button2+"</td>";
                 eTable += "</tr>";

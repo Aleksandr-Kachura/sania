@@ -65,7 +65,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     public void delete(Department model) throws SQLException {
         currentSession().delete(model);
-        throw new SQLException("Adddddd");
     }
 
 

@@ -16,11 +16,11 @@
         <table border="3" class="table table-sm"  >
             <thead>
             <tr class="tabHead">
-                <th >Empl Id</th>
-                <th >firstName</th>
-                <th  >secondName</th>
-                <th  >birthday</th>
-                <th  >Email</th>
+                <th>Empl Id</th>
+                <th>firstName</th>
+                <th>secondName</th>
+                <th>birthday</th>
+                <th>Email</th>
                 <th colspan=2>Action</th>
             </tr>
             </thead>

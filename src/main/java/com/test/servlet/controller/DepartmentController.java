@@ -38,13 +38,14 @@ public class DepartmentController {
 
     //@RequestParam from jsp to controller
     @RequestMapping(value = "/delDep", method = RequestMethod.POST)
-    public String deleteOne(@RequestParam(required = true) Integer id) throws SQLException {
-        String direct = "";
-        direct = "redirect:/showAllDep"; // special char
+    @ResponseBody
+    public List<Department> deleteOne(@RequestParam Integer Id) throws SQLException {
+     /*   String direct = "";
+        direct = "redirect:/page"; */// special char
         Department department;
-        department = depServ.findDepartmentById(id);
+        department = depServ.findDepartmentById(Id);
         depServ.delete(department);
-        return direct;
+        return depServ.findAll();
     }
 
 
