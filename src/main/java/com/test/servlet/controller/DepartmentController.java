@@ -28,7 +28,7 @@ public class DepartmentController {
         return new ModelAndView("index");
     } //Object ModelAndView provide return both View and Model, return to handler
 
-    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    @RequestMapping(value = "/DepAll", method = RequestMethod.GET)
     @ResponseBody
     public List<Department> showAll() throws SQLException {
 

@@ -1,32 +1,23 @@
 $( document ).ready(function() {
 
+   var globalscope;
 
-  // var contr = new Department();
-   var contr = new Department();
-    contr.showOther();
+   var contr = new Main();
+    contr.showHeader();
 
 
     var Ingredients = {
-        1: function(){return new DepAll()},
-        2: function(){return new DepOne()},
-    DelDep:function(){return new DelDep()}
+        DepAll: function(){return new DepAll(event)},
+        DelDep:function(){return new DelDep(event)}
 
     };
 
-    $('body').on("click",".other", function(){
 
-        DelDep.prototype.id=$(this).attr('name');
+
+    $('body').on("click",".listen", function(event){
         var value =  $(this).attr('value');
-        //var id = $(this).attr('name');
-        Ingredients[value]();
+        Ingredients[value](event);
     });
-
-
-  /*  $(".other").click(function() {
-      var id =  $(this).attr('value');
-      Ingredients[id]();
-
-    });*/
 
 
 });
