@@ -8,7 +8,8 @@ $( document ).ready(function() {
 
     var Ingredients = {
         DepAll: function(){return new DepAll(event)},
-        DelDep:function(){return new DelDep(event)}
+        DelDep:function(){return new DelDep(event)},
+        AddDep:function(){return new AddDep(event)}
 
     };
 

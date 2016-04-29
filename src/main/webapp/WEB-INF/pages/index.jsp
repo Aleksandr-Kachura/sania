@@ -8,6 +8,7 @@
     <script src="<c:url value="/resources/js/header.js" />"></script>
     <script src="<c:url value="/resources/js/DepAll.js" />"></script>
     <script src="<c:url value="/resources/js/DelDep.js" />"></script>
+    <script src="<c:url value="/resources/js/AddDep.js" />"></script>
     <script src="<c:url value="/resources/js/main.js" />"></script>
 
 </head>
