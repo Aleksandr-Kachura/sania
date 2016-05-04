@@ -50,21 +50,22 @@ public class DepartmentController {
 
 
     @RequestMapping(value = "/editOrAddDep")
-    public ModelAndView editOrAdd(@RequestParam(required = false) Integer id) throws SQLException {
-        ModelAndView modelAndView = new ModelAndView("/dep/create");
-        Department department;
+    @ResponseBody
+    public Department editOrAdd(@RequestParam(required = false) Integer id) throws SQLException {
+        //ModelAndView modelAndView = new ModelAndView("/dep/create");
+        Department department = null;
         if (id != null) {
             department = depServ.findDepartmentById(id);
-            modelAndView.addObject("department", department);
+          //  modelAndView.addObject("department", department);
         }
 
-        return modelAndView;
+        return department;
     }
 
 
-    //Understand Depertment by attribute
     @RequestMapping(value = "/depSaveOrUpdate", method = RequestMethod.POST)
-    public ModelAndView addNewOne(Department department) throws SQLException {
+    @ResponseBody
+    public List<Department> addNewOne(@RequestBody Department department) throws SQLException {
         try {
             depServ.saveOrUpdate(department);
         } catch (ValidationException e) {
@@ -72,10 +73,10 @@ public class DepartmentController {
             Map<String, String> error = e.getError();
             modelAndView.addObject("department", department);
             modelAndView.addObject("error", error);
-            return modelAndView;
+            return depServ.findAll();
 
         }
-        return new ModelAndView("redirect:/showAllDep");
+        return depServ.findAll();
     }
 
 

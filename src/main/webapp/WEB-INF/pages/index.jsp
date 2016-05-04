@@ -7,15 +7,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="<c:url value="/resources/js/header.js" />"></script>
     <script src="<c:url value="/resources/js/DepAll.js" />"></script>
+
     <script src="<c:url value="/resources/js/DelDep.js" />"></script>
-    <script src="<c:url value="/resources/js/AddDep.js" />"></script>
+    <script src="<c:url value="/resources/js/Service.js" />"></script>
+    <script src="<c:url value="/resources/js/Employee.js" />"></script>
     <script src="<c:url value="/resources/js/main.js" />"></script>
 
 </head>
 <body>
 <div id="content">
 </div>
-<div id="table">
+<div class="container">
 </div>
 </body>
 </html>
