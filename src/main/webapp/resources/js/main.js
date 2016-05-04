@@ -1,15 +1,11 @@
+$(document).ready(function () {
 
 
-$( document ).ready(function() {
+    function Department() {
 
-
-    function Department()
-    {
-
-        Department.prototype.viewDepartmentsList = function()
-        {
+        Department.prototype.viewDepartmentsList = function () {
             $.ajax({
-                url : '/DepAll',
+                url: '/DepAll',
                 type: 'GET',
                 success: function (data) {
                     service.BuildDep(data);
@@ -18,15 +14,13 @@ $( document ).ready(function() {
         }
 
 
-        Department.prototype.viewDepartment = function(dep)
-        {
+        Department.prototype.viewDepartment = function (dep) {
 
-            var name ='';
+            var name = '';
             var id = '';
-            if(dep !== undefined)
-            {
-                 name =dep.name||'';
-                 id =dep.id || '';
+            if (dep !== undefined) {
+                name = dep.name || '';
+                id = dep.id || '';
             }
 
 
@@ -36,16 +30,22 @@ $( document ).ready(function() {
             var row1 = $("<div class='row'/>");
             var row2 = $("<div class='row'/>");
 
-            var eTable=" ";
+            var eTable = " ";
 
 
             eTable += "<p>Name: </p>";
             var input_name = $('<input />',
-                { id: "input_name", type: 'text',  value: name  });
+                {id: "input_name", type: 'text', value: name});
 
             var button = $('<input />',
-                {  type: 'button',value: 'Add',class: 'btn btn-primary',
-                    on:{  click:function()   { department.saveDepartment(id) } } });
+                {
+                    type: 'button', value: 'Add', class: 'btn btn-primary',
+                    on: {
+                        click: function () {
+                            department.saveDepartment(id)
+                        }
+                    }
+                });
             row1.append(eTable);
             row1.append(input_name);
             col.append(row1);
@@ -53,10 +53,9 @@ $( document ).ready(function() {
             col.append(row2);
         }
 
-        Department.prototype.saveDepartment = function(id)
-        {
+        Department.prototype.saveDepartment = function (id) {
             var name = document.getElementById("input_name").value;
-            var department2 = {"id" : id, "name" : name};
+            var department2 = {"id": id, "name": name};
             console.log("department");
             $.ajax({
                 type: 'POST',
@@ -69,14 +68,13 @@ $( document ).ready(function() {
             });
         }
 
-        Department.prototype.EditOrSave=function(id)
-        {
-           $.ajax({
+        Department.prototype.EditOrSave = function (id) {
+            $.ajax({
                 url: '/editOrAddDep',
-                data : ({
+                data: ({
                     id: id
                 }),
-                dataType : 'json',
+                dataType: 'json',
                 type: 'POST',
                 success: function (data) {
                     department.viewDepartment(data)
@@ -101,16 +99,21 @@ $( document ).ready(function() {
     var employee = new Employee();
 
     var Ingredients = {
-        DepAll: function(){return new DepAll(event)},
-        DelDep:function(){return new DelDep(event)},
-        AddDep:function(){department.viewDepartment();}
+        DepAll: function () {
+            return new DepAll(event)
+        },
+        DelDep: function () {
+            return new DelDep(event)
+        },
+        AddDep: function () {
+            department.viewDepartment();
+        }
 
     };
 
 
-
-    $('body').on("click",".listen", function(event){
-        var value =  $(this).attr('value');
+    $('body').on("click", ".listen", function (event) {
+        var value = $(this).attr('value');
         Ingredients[value](event);
     });
 

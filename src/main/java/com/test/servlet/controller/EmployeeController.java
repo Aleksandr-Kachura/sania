@@ -38,13 +38,11 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/showAllEmpl", method = RequestMethod.GET)
-    public ModelAndView showAll(@RequestParam(required = true) Integer depId) throws SQLException {
+    @ResponseBody
+    public List<Employee> showAll(@RequestParam(required = true) Integer Id) throws SQLException {
         List<Employee> employees;
-        employees = emplServ.findAllEmployee(depId);
-        ModelAndView modelAndView = new ModelAndView("/empl/all");
-        modelAndView.addObject("employees", employees);
-        modelAndView.addObject("depId", depId);
-        return modelAndView;
+        employees = emplServ.findAllEmployee(Id);
+        return employees;
 
     }
 
