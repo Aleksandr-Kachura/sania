@@ -1,4 +1,5 @@
-function Employee()
+
+    function Employee()
     {
         Employee.prototype.viewEmployeeList = function(id)
         {
@@ -21,26 +22,41 @@ function Employee()
 
 
        Employee.prototype.saveEmployee = function (id) {
+
             var name = document.getElementById("input_first").value;
             var secondName = document.getElementById("input_second").value;
             var birthday = document.getElementById("input_birthday").value;
             var email = document.getElementById("input_email").value;
             var id_empl = document.getElementById("input_emplid").value;
 
+           var union = {};
             var employeeObj = {
                 "id": id_empl ,
                 "firstName": name,
-                "lastName": secondName,
-                "birthday": birthday,
-                "email": email
+                "secondName": secondName,
+                "birthday":birthday,
+                "email": email,
+                "depId":id
+
             };
-            $.ajax({
+
+           var depId={
+               "depId": id
+           };
+           union.employee=employeeObj;
+           $.ajax({
                 type: 'POST',
+                dataType : 'json',
+                url: "/employeeSaveOrUpdate?depId=10",
                 contentType: "application/json",
-                url: "/emplSaveOrUpdate",
-                data: JSON.stringify(department2),
+
+                data : (JSON.stringify(employeeObj)),
+
+              /*    data : ({
+                   depId: id
+                }),*/
                 success: function (data) {
-                    service.BuildEmpl(data);
+                    service.BuildEmpl(data,id);
                 }
             });
         };
@@ -50,11 +66,5 @@ function Employee()
         Employee.prototype.EditOrSave  = function (id) {
           alert("OK");
         };
-
-
-
-
-
-
-
     }
+

@@ -1,3 +1,5 @@
+(function()
+{
 $(document).ready(function () {
 
 
@@ -83,8 +85,6 @@ $(document).ready(function () {
 
         }
     }
-
-
     var contr = new Main();
     contr.showHeader();
 
@@ -92,9 +92,11 @@ $(document).ready(function () {
 
     var department = new Department();
     window.GlobDep = department;
-    department.viewDepartmentsList();
 
     var employee = new Employee();
+
+    department.viewDepartmentsList();
+
 
     var Ingredients = {
         DepAll: function () {
@@ -117,3 +119,4 @@ $(document).ready(function () {
 
 
 });
+})(window, document);

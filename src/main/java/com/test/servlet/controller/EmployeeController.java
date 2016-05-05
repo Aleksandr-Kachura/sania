@@ -66,25 +66,22 @@ public class EmployeeController {
     }
 
 
-    @RequestMapping(value = "/employeeSaveOrUpdate")
-    public ModelAndView employeeSaveOrUpdate(Employee employee, @RequestParam(required = true) Integer depId) throws SQLException {
-        ModelAndView modelAndView;
+    @RequestMapping(value = "/employeeSaveOrUpdate", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Employee> employeeSaveOrUpdate( @RequestParam("depId") Integer depId, @RequestBody Employee employee) throws SQLException {
+
+        depId = 2;
         Department department = depServ.findDepartmentById(depId);
         employee.setDepartment(department);
         try {
             emplServ.saveOrUpdate(employee);
         } catch (ValidationException e) {
-            modelAndView = new ModelAndView("/empl/create");
-            Map<String, String> error = e.getError();
-            modelAndView.addObject("depId", depId);
-            modelAndView.addObject("employee", employee);
-            modelAndView.addObject("error", error);
-            return modelAndView;
+          Map<String, String> error = e.getError();
+
+            return emplServ.findAllEmployee(depId);
         }
 
-        modelAndView = new ModelAndView("redirect:/showAllEmpl");
-        modelAndView.addObject("depId", depId);
-        return modelAndView;
+        return emplServ.findAllEmployee(depId);
     }
 
 }

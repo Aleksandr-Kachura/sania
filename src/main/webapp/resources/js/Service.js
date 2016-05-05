@@ -107,7 +107,6 @@ function Service() {
         var employee = new Employee();
         var department = window.GlobDep;
         var service = new Service();
-
         var firstname = '';
         var secondname = '';
         var birthday = '';
@@ -115,8 +114,8 @@ function Service() {
         var emplId ='';
         if (empl !== undefined) {
             emplId = empl.id;
-            firstname = empl.firstname;
-            secondname = empl.secondname;
+            firstname = empl.firstName;
+            secondname = empl.secondName;
             birthday = empl.birthday;
             email = empl.email
         }
@@ -131,16 +130,16 @@ function Service() {
         var row5 = $("<br/><div class='row'/>");
         var eTable = " ";
         eTable += "<p>FirstName: </p>";
-        var buf = $('<input class="in_text"/>',
-            {id: "input_first", type: 'text', value: firstname});
+        var buf = $('<input />',
+            {id: "input_first", class:"in_text", type: 'text', value: firstname});
 
         row1.append(eTable);
         row1.append(buf);
         col.append(row1);
         eTable = " ";
         eTable += "<p>SecondName: </p>";
-        buf = $('<input class="in_text"/>',
-            {id: "input_second", class:"form-group",type: 'text', value: secondname});
+        buf = $('<input />',
+            {id: "input_second", class:"in_text",type: 'text', value: secondname});
 
         row2.append(eTable);
         row2.append(buf);
@@ -158,22 +157,22 @@ function Service() {
 
         eTable = " ";
         eTable += "<p>Email: </p>";
-        buf = $('<input class="in_text"/>',
-            {id: "input_email", type: 'text', value: email});
+        buf = $('<input />',
+            {id: "input_email", class:"in_text", type: 'text', value: email});
 
         row4.append(eTable);
         row4.append(buf);
         col.append(row4);
         buf = $('<input />',
             {id: "input_emplid", type: 'hidden', value:  emplId});
-
         col.append(buf);
         var button = $('<input />',
             {
                 type: 'button', value: 'Add', class: 'btn btn-primary',
                 on: {
                     click: function () {
-                        employee.saveEmployee(id)
+                         employee.saveEmployee(id,this)
+
                     }
                 }
             });
@@ -181,8 +180,6 @@ function Service() {
         col.append(row5);
         form.append(col);
     }
-
-
 
 }
 
