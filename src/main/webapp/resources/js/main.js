@@ -11,7 +11,7 @@ $(document).ready(function () {
                     service.BuildDep(data);
                 }
             });
-        }
+        };
 
 
         Department.prototype.viewDepartment = function (dep) {
@@ -51,7 +51,7 @@ $(document).ready(function () {
             col.append(row1);
             row2.append(button);
             col.append(row2);
-        }
+        };
 
         Department.prototype.saveDepartment = function (id) {
             var name = document.getElementById("input_name").value;
@@ -66,7 +66,7 @@ $(document).ready(function () {
                     service.BuildDep(data);
                 }
             });
-        }
+        };
 
         Department.prototype.EditOrSave = function (id) {
             $.ajax({
@@ -78,9 +78,7 @@ $(document).ready(function () {
                 type: 'POST',
                 success: function (data) {
                     department.viewDepartment(data)
-
                 }
-
             });
 
         }
@@ -90,7 +88,7 @@ $(document).ready(function () {
     var contr = new Main();
     contr.showHeader();
 
-    var service = new Service;
+    var service = new Service();
 
     var department = new Department();
     window.GlobDep = department;
