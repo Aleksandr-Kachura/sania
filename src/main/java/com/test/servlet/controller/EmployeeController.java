@@ -47,10 +47,11 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/delEmpl")
-    public String deleteOne(@RequestParam(required = true) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
+    @ResponseBody
+    public List<Employee>  deleteOne(@RequestParam(required = true) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
         Employee employee = emplServ.findEmployeeById(id);
         emplServ.delete(employee);
-        return "redirect:/showAllEmpl?depId=" + depId;
+        return emplServ.findAllEmployee(depId);
     }
 
     @RequestMapping(value = "/editOrAddEmpl")
@@ -70,7 +71,6 @@ public class EmployeeController {
     @ResponseBody
     public List<Employee> employeeSaveOrUpdate( @RequestParam("depId") Integer depId, @RequestBody Employee employee) throws SQLException {
 
-        depId = 2;
         Department department = depServ.findDepartmentById(depId);
         employee.setDepartment(department);
         try {

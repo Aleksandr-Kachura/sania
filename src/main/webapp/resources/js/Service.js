@@ -50,7 +50,7 @@ function Service() {
     }
 
 
-    Service.prototype.BuildEmpl = function(data,id)
+    Service.prototype.BuildEmpl = function(data,depId)
     {
         var employee = new Employee();
         var department = window.GlobDep;
@@ -75,6 +75,9 @@ function Service() {
         {
             var id = data[i]['id'];
             var button ="<button class='listen btn btn-danger' value='DelEmpl'  name="+data[i]['id']+">Delete</button> ";
+            var button = $('<input />',
+                {  type: 'button',value: 'DelEmpl',class: 'isten btn btn-danger',id: id,
+                    on:{  click:function()   { employee.EmplDel(this.id) } } });
             var button2 = $('<input />',
                 {  type: 'button',value: 'EditEmpl',class: 'btn btn-success',id: id,
                     on:{  click:function()   { employee.EditOrSave(this.id) } } });
@@ -93,8 +96,11 @@ function Service() {
             row.appendTo(table);
 
         }
+       var buf = $('<input />',
+            {id: "input_depId", type: 'hidden', value:  depId});
+        table.append(buf);
         var create = $('<input />',
-            {  type: 'button',value: 'Create',class: 'btn btn-success',id: id,
+            {  type: 'button',value: 'Create',class: 'btn btn-success',id: depId,
                 on:{  click:function()   { service.BuildOneEmpl('',this.id) } } });
         table.append(row);
         form.append(table) ;
@@ -171,7 +177,7 @@ function Service() {
                 type: 'button', value: 'Add', class: 'btn btn-primary',
                 on: {
                     click: function () {
-                         employee.saveEmployee(id,this)
+                         employee.saveEmployee(id)
 
                     }
                 }

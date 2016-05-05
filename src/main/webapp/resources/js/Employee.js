@@ -23,13 +23,12 @@
 
        Employee.prototype.saveEmployee = function (id) {
 
+            var service = new Service();
             var name = document.getElementById("input_first").value;
             var secondName = document.getElementById("input_second").value;
             var birthday = document.getElementById("input_birthday").value;
             var email = document.getElementById("input_email").value;
             var id_empl = document.getElementById("input_emplid").value;
-
-           var union = {};
             var employeeObj = {
                 "id": id_empl ,
                 "firstName": name,
@@ -40,14 +39,10 @@
 
             };
 
-           var depId={
-               "depId": id
-           };
-           union.employee=employeeObj;
            $.ajax({
                 type: 'POST',
                 dataType : 'json',
-                url: "/employeeSaveOrUpdate?depId=10",
+                url: "/employeeSaveOrUpdate?depId="+id,
                 contentType: "application/json",
 
                 data : (JSON.stringify(employeeObj)),
@@ -60,6 +55,27 @@
                 }
             });
         };
+
+        Employee.prototype.EmplDel=function(id)
+        {
+            var service = new Service();
+            var depId = document.getElementById("input_depId").value;
+            console.log(event);
+            $.ajax({
+                url: '/delEmpl',
+                dataType : 'json',
+                data : ({
+                    id: id,
+                    depId:depId
+                }),
+                type: 'POST',
+                success: function (data) {
+                    service.BuildEmpl(data,depId);
+
+                }
+
+            });
+        }
 
 
 
