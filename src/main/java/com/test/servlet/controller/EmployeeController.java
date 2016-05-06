@@ -17,10 +17,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-
-/**
- * Created on 21.04.16.
- */
 @Controller
 public class EmployeeController {
 
@@ -55,15 +51,13 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/editOrAddEmpl")
-    public ModelAndView editOrAddEmpl(@RequestParam(required = false) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
-        ModelAndView modelAndView = new ModelAndView("/empl/create");
+    @ResponseBody
+    public Employee editOrAddEmpl(@RequestParam(required = false) Integer id) throws SQLException {
         Employee employee = new Employee();
         if (id != null) {
                employee = emplServ.findEmployeeById(id);
         }
-        modelAndView.addObject("employee", employee);
-        modelAndView.addObject("depId", depId);
-        return modelAndView;
+        return employee;
     }
 
 

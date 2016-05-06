@@ -38,18 +38,12 @@
                 "depId":id
 
             };
-
            $.ajax({
                 type: 'POST',
                 dataType : 'json',
                 url: "/employeeSaveOrUpdate?depId="+id,
                 contentType: "application/json",
-
                 data : (JSON.stringify(employeeObj)),
-
-              /*    data : ({
-                   depId: id
-                }),*/
                 success: function (data) {
                     service.BuildEmpl(data,id);
                 }
@@ -75,12 +69,25 @@
                 }
 
             });
-        }
-
-
-
-        Employee.prototype.EditOrSave  = function (id) {
-          alert("OK");
         };
+
+
+
+        Employee.prototype.EditOrSave = function (id) {
+            var service = new Service();
+            var depId = document.getElementById("input_depId").value;
+            $.ajax({
+                url: '/editOrAddEmpl',
+                data: ({
+                    id: id
+                }),
+                dataType: 'json',
+                type: 'POST',
+                success: function (data) {
+                    service.BuildOneEmpl(data,depId)
+                }
+            });
+
+        }
     }
 

@@ -1,16 +1,28 @@
 function Service() {
 
 
-
+    var ValRules = {
+        rules: {
+            input_name: {
+                required: true,
+                minlength: 2
+            }
+        }, messages: {
+            input_name: {
+                minlength: "Min length 2",
+                required: "Its requery"
+            }
+        }
+    };
 
     Service.prototype.BuildDep = function(data)
     {
         var employee = new Employee();
         var department = window.GlobDep;
-        var service = new Service()
+
 
         $('.container').html('');
-        var form = $('<from>');
+        var form = $('<from/>');
         $('.container').html(form);
         var table = $("<table class='table table-sm' border='3'/>");
 
@@ -58,7 +70,7 @@ function Service() {
 
 
         $('.container').html('');
-        var form = $('<from>');
+        var form = $('<from/>');
         $('.container').html(form);
         var table = $("<table class='table table-sm' border='3'/>");
 
@@ -105,7 +117,44 @@ function Service() {
         table.append(row);
         form.append(table) ;
         form.append(create);
-    }
+    };
+
+    Service.prototype.viewDepartment = function (dep) {
+        var department = window.GlobDep;
+        var name = '';
+        var id = '';
+        if (dep !== undefined) {
+            name = dep.name || '';
+            id = dep.id || '';
+        }
+        $('.container').html('');
+        var form = $('<from id="depForm"/>');
+        $('.container').html(form);
+        var col = $("<div class='col-md-6'/>");
+        form.append(col);
+        var row1 = $("<div class='row'/>");
+        var row2 = $("<div class='row'/>");
+        var eTable = " ";
+        eTable += "<p>Name: </p>";
+        var input_name = $('<input />',
+            {id: "input_name",name:"input_name", type: 'text', value: name});
+        //console.log(ValRules);
+        var button = $('<input />',
+            {
+                type: 'submit', value: 'Add', class: 'btn btn-primary',
+                on: {
+                    click: function () {
+                         department.saveDepartment(id)
+                    }
+                }
+            });
+        row1.append(eTable);
+        row1.append(input_name);
+        col.append(row1);
+        row2.append(button);
+        col.append(row2);
+
+    };
 
 
     Service.prototype.BuildOneEmpl = function(empl,id)
