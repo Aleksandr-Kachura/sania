@@ -17,57 +17,22 @@ $(document).ready(function () {
         };
 
 
-        /*Department.prototype.viewDepartment = function (dep) {
-
-            var name = '';
-            var id = '';
-            if (dep !== undefined) {
-                name = dep.name || '';
-                id = dep.id || '';
-            }
-
-
-            $('.container').html('');
-            var col = $("<div class='col-md-6'/>");
-            $('.container').html(col);
-            var row1 = $("<div class='row'/>");
-            var row2 = $("<div class='row'/>");
-
-            var eTable = " ";
-
-
-            eTable += "<p>Name: </p>";
-            var input_name = $('<input />',
-                {id: "input_name", type: 'text', value: name});
-
-            var button = $('<input />',
-                {
-                    type: 'button', value: 'Add', class: 'btn btn-primary',
-                    on: {
-                        click: function () {
-                            department.saveDepartment(id)
-                        }
-                    }
-                });
-            row1.append(eTable);
-            row1.append(input_name);
-            col.append(row1);
-            row2.append(button);
-            col.append(row2);
-        };*/
-
         Department.prototype.saveDepartment = function (id) {
-            var name = document.getElementById("input_name").value;
-            var department = {"id": id, "name": name};
+            var name = document.getElementById("name").value;
+            var depart = {"id": id, "name": name};
             console.log("department");
             $.ajax({
                 type: 'POST',
                 contentType: "application/json",
                 url: "/depSaveOrUpdate",
-                data: JSON.stringify(department),
+                data: JSON.stringify(depart),
                 success: function (data) {
-                    service.BuildDep(data);
-
+                    //
+                    if(data.status == "SUCCESS") {
+                        service.BuildDep(data.department);
+                    } else {
+                        service.viewDepartment(depart,data.error.name)
+                    }
                 }
             });
         };
@@ -86,7 +51,8 @@ $(document).ready(function () {
                 }
             });
 
-        }
+        };
+
     }
     var contr = new Main();
     contr.showHeader();
@@ -109,7 +75,7 @@ $(document).ready(function () {
             return new DelDep(event)
         },
         AddDep: function () {
-            service.viewDepartment();
+            department.viewDepartment();
         }
 
     };

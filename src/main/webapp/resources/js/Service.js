@@ -1,25 +1,10 @@
 function Service() {
 
-
-    var ValRules = {
-        rules: {
-            input_name: {
-                required: true,
-                minlength: 2
-            }
-        }, messages: {
-            input_name: {
-                minlength: "Min length 2",
-                required: "Its requery"
-            }
-        }
-    };
-
     Service.prototype.BuildDep = function(data)
     {
         var employee = new Employee();
         var department = window.GlobDep;
-
+        var service = new Service();
 
         $('.container').html('');
         var form = $('<from/>');
@@ -54,7 +39,16 @@ function Service() {
             row.appendTo(table);
 
         }
-        var create ="<input class='listen btn btn-primary' type='submit' value='AddDep'/>"
+      //  var create ="<input class='listen btn btn-primary' type='submit' value='AddDep'/>"
+        var create = $('<input />',
+            {
+                type: 'submit', value: 'Create', class: 'btn btn-primary',
+                on: {
+                    click: function () {
+                        service.viewDepartment();
+                    }
+                }
+            });
         table.append(row);
         form.append(table) ;
         form.append(create);
@@ -66,7 +60,7 @@ function Service() {
     {
         var employee = new Employee();
         var department = window.GlobDep;
-        var service = new Service()
+        var service = new Service();
 
 
         $('.container').html('');
@@ -119,54 +113,65 @@ function Service() {
         form.append(create);
     };
 
-    Service.prototype.viewDepartment = function (dep) {
-        var department = window.GlobDep;
+    Service.prototype.viewDepartment = function (dep,e)
+    {
+
+        var depId = '';
         var name = '';
-        var id = '';
+        //var e =null;
         if (dep !== undefined) {
-            name = dep.name || '';
-            id = dep.id || '';
+            name = dep.name;
+            depId = dep.id;
         }
-        $('.container').html('');
-        var form = $('<from id="depForm"/>');
-        $('.container').html(form);
-        var col = $("<div class='col-md-6'/>");
-        form.append(col);
-        var row1 = $("<div class='row'/>");
-        var row2 = $("<div class='row'/>");
-        var eTable = " ";
-        eTable += "<p>Name: </p>";
-        var input_name = $('<input />',
-            {id: "input_name",name:"input_name", type: 'text', value: name});
-        //console.log(ValRules);
+        var department = window.GlobDep;
+        $('.container').children().detach()
+        var div = $('<div/>').appendTo($('.container'));
         var button = $('<input />',
             {
                 type: 'submit', value: 'Add', class: 'btn btn-primary',
-                on: {
-                    click: function () {
-                         department.saveDepartment(id)
-                    }
-                }
             });
-        row1.append(eTable);
-        row1.append(input_name);
-        col.append(row1);
-        row2.append(button);
-        col.append(row2);
+        var form = $('<form enctype="multipart/form-data" id="depForm"/>')
+            .append($('<label/>').text("Name Department").append($('<br/>')))
+            .append($('<input class="input-control text" type="text" id="name" name="name" />')
+                .val(dep != null ? dep.name : "")).append($("<span class='error'/>").text(e != null ? e : "")).append($('<br/>'))
+            .append($('<input type="hidden" id="id" name="id"/>')
+                .val(dep != null ? dep.id : "")).append($('<br/>'))
+            .append(button)
+            .appendTo(div);
 
+
+
+
+        $('#depForm').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 16
+
+                }
+            },
+            messages: {
+                name: {
+                    remote: "Name already in use!"
+                }
+            },submitHandler: function ()
+            {
+                department.saveDepartment(depId)
+             }
+        });
     };
 
-
-    Service.prototype.BuildOneEmpl = function(empl,id)
+    Service.prototype.BuildOneEmpl = function(empl,id,err)
     {
         var employee = new Employee();
         var department = window.GlobDep;
         var service = new Service();
-        var firstname = '';
-        var secondname = '';
-        var birthday = '';
-        var email = '';
-        var emplId ='';
+        var firstname = null;
+        var secondname = null;
+        var birthday = null;
+        var email = null;
+        var emplId =null;
         if (empl !== undefined) {
             emplId = empl.id;
             firstname = empl.firstName;
@@ -174,67 +179,79 @@ function Service() {
             birthday = empl.birthday;
             email = empl.email
         }
-        $('.container').html('');
-        var form = $("<form class='form-inline' />");
-        $('.container').html(form);
-        var col = $("<div class=' col-md-6'/>");
-        var row1 = $("<div class='row'/>");
-        var row2 = $("<div class='row'/>");
-        var row3 = $("<div class='row'/>");
-        var row4 = $("<div class='row'/>");
-        var row5 = $("<br/><div class='row'/>");
-        var eTable = " ";
-        eTable += "<p>FirstName: </p>";
-        var buf = $('<input />',
-            {id: "input_first", class:"in_text", type: 'text', value: firstname});
 
-        row1.append(eTable);
-        row1.append(buf);
-        col.append(row1);
-        eTable = " ";
-        eTable += "<p>SecondName: </p>";
-        buf = $('<input />',
-            {id: "input_second", class:"in_text",type: 'text', value: secondname});
+        var validatedRules = {
+            rules: {
+                input_first: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                },
+                input_second: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20
+                },
+                input_email: {
+                    required: true,
+                    email: true
+                },
+                input_birthday: {
+                    required: true,
+                    date: true
+                }
 
-        row2.append(eTable);
-        row2.append(buf);
-        col.append(row2);
+            }, messages: {
+                input_first: {
+                    minlength: "Min length is 3",
+                    maxlength: "Min length is 20",
+                    required: "This is required field"
+                },
+                input_second: {
+                    minlength: "Min length is 3",
+                    maxlength: "Min length is 20",
+                    required: "This is required field"
+                },
+                input_email: {
+                    required: "This is required field",
+                    email: "Not valid email"
+                },
+                input_birthday: {
+                    required: "This is required field"
+                }
+            },submitHandler: function () {
+                employee.saveEmployee(id);
+            }
+        };
 
-        eTable = " ";
-        eTable += "<p>Birthday: </p>";
-        buf = $('<input />',
-            {id: "input_birthday", type: 'date', value: birthday});
-
-        row3.append(eTable);
-        row3.append(buf);
-        col.append(row3);
-
-
-        eTable = " ";
-        eTable += "<p>Email: </p>";
-        buf = $('<input />',
-            {id: "input_email", class:"in_text", type: 'text', value: email});
-
-        row4.append(eTable);
-        row4.append(buf);
-        col.append(row4);
-        buf = $('<input />',
-            {id: "input_emplid", type: 'hidden', value:  emplId});
-        col.append(buf);
+        $('.container').children().detach();
+        var div = $('<div/>').appendTo($('.container'));
         var button = $('<input />',
             {
-                type: 'button', value: 'Add', class: 'btn btn-primary',
-                on: {
-                    click: function () {
-                         employee.saveEmployee(id)
+                type: 'submit', value: 'Add', class: 'btn btn-primary',
+             });
 
-                    }
-                }
-            });
-        row5.append(button);
-        col.append(row5);
-        form.append(col);
-    }
+        $('<form id="empForm"/>')
+            .append($('<label/>').text("FirstName")).append('<br/>')
+            .append($('<input class="input-control text" type="text" id="input_first" name="input_first"/>')
+                .val(firstname)).append($("<span class='error'/>").text(err != null ? err.firstName : "")).append($('<br/>'))
+            .append($('<label/>').text("SecondName")).append('<br/>')
+            .append($('<input class="input-control text" type="text" id="input_second" name="input_second"/>')
+                .val(secondname)).append($("<span class='error'/>").text(err != null ? err.secondName : "")).append($('<br/>'))
+            .append($('<label/>').text("Email")).append('<br/>')
+            .append($('<input class="input-control text" type="text" id="input_email" name="input_email"/>')
+                .val(email)).append($("<span class='error'/>").text(err!= null ? err.email : "")).append($('<br/>'))
+            .append($('<label/>').text("Birthday")).append('<br/>')
+            .append($('<input class="input-control text" type="date" id="input_birthday" name="input_birthday"/>')
+                .val(birthday)).append($("<span class='error'/>").text(err!= null ? err.birthday : "")).append($('<br/>'))
+            .append($('<input type="hidden" id="input_emplid" name="emplId"/>').val(empl != null ? empl.id : ""))
+            .append(button)
+            .appendTo(div);
+        $('#empForm').validate(validatedRules);
+
+
+    };
+
 
 }
 

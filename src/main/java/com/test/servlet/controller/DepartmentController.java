@@ -3,6 +3,7 @@ package com.test.servlet.controller;
 import com.test.servlet.exception.ValidationException;
 import com.test.servlet.model.Department;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
+import com.test.servlet.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -63,20 +64,23 @@ public class DepartmentController {
     }
 
 
+
     @RequestMapping(value = "/depSaveOrUpdate", method = RequestMethod.POST)
     @ResponseBody
-    public List<Department> addNewOne(@RequestBody Department department) throws SQLException {
+    public JsonResponse addNewOne(@RequestBody Department department) throws SQLException {
+        JsonResponse result = new JsonResponse();
         try {
             depServ.saveOrUpdate(department);
+            result.setStatus("SUCCESS");
+            result.setDepartment(depServ.findAll());
+
         } catch (ValidationException e) {
-            ModelAndView modelAndView = new ModelAndView("/dep/create");
             Map<String, String> error = e.getError();
-            modelAndView.addObject("department", department);
-            modelAndView.addObject("error", error);
-            return depServ.findAll();
+            result.setError(error);
+            result.setStatus("FAIL");
 
         }
-        return depServ.findAll();
+        return result;
     }
 
 

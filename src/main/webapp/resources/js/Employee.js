@@ -21,8 +21,7 @@
         };
 
 
-       Employee.prototype.saveEmployee = function (id) {
-
+        Employee.prototype.saveEmployee = function (id) {
             var service = new Service();
             var name = document.getElementById("input_first").value;
             var secondName = document.getElementById("input_second").value;
@@ -38,14 +37,24 @@
                 "depId":id
 
             };
-           $.ajax({
+            $.ajax({
                 type: 'POST',
                 dataType : 'json',
                 url: "/employeeSaveOrUpdate?depId="+id,
                 contentType: "application/json",
                 data : (JSON.stringify(employeeObj)),
                 success: function (data) {
-                    service.BuildEmpl(data,id);
+                    //
+                    if(data.status == "SUCCESS") {
+                        // thisObj.showDepartments();
+                        service.BuildEmpl(data.employee,id);
+                    } else {
+                        /* var department = data.result;
+                         thisObj.errorMessage = data.error.name;
+                         $('div.department').html(table);*/
+                        service.BuildOneEmpl(employeeObj,id,data.error);
+                    }
+
                 }
             });
         };
