@@ -3,7 +3,6 @@
     {
         Employee.prototype.viewEmployeeList = function(id)
         {
-
             var service = new Service();
             $.ajax({
                 url: '/showAllEmpl',
@@ -14,15 +13,12 @@
                 type: 'GET',
                 success: function (data) {
                     service.BuildEmpl(data,id);
-
                 }
-
             });
         };
 
 
        Employee.prototype.saveEmployee = function (id) {
-
             var service = new Service();
             var name = document.getElementById("input_first").value;
             var secondName = document.getElementById("input_second").value;
@@ -38,20 +34,24 @@
                 "depId":id
 
             };
-
            $.ajax({
                 type: 'POST',
                 dataType : 'json',
                 url: "/employeeSaveOrUpdate?depId="+id,
                 contentType: "application/json",
-
                 data : (JSON.stringify(employeeObj)),
-
-              /*    data : ({
-                   depId: id
-                }),*/
                 success: function (data) {
-                    service.BuildEmpl(data,id);
+                    //
+                    if(data.status == "SUCCESS") {
+                        // thisObj.showDepartments();
+                        service.BuildEmpl(data.employee,id);
+                    } else {
+                        /* var department = data.result;
+                         thisObj.errorMessage = data.error.name;
+                          $('div.department').html(table);*/
+                        service.BuildOneEmpl(employeeObj,id,data.error);
+                    }
+
                 }
             });
         };
@@ -75,12 +75,26 @@
                 }
 
             });
+        };
+
+
+
+        Employee.prototype.EditOrSave = function (id) {
+            var service = new Service();
+            var depId = document.getElementById("input_depId").value;
+            $.ajax({
+                url: '/editOrAddEmpl',
+                data: ({
+                    id: id
+                }),
+                dataType: 'json',
+                type: 'POST',
+                success: function (data) {
+                    service.BuildOneEmpl(data,depId)
+                }
+            });
+
         }
 
-
-
-        Employee.prototype.EditOrSave  = function (id) {
-          alert("OK");
-        };
     }
 

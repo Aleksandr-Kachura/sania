@@ -6,6 +6,7 @@ import com.test.servlet.model.Department;
 import com.test.servlet.model.Employee;
 import com.test.servlet.service.impl.DepartmentServiceImpl;
 import com.test.servlet.service.impl.EmployeeServiceImpl;
+import com.test.servlet.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
@@ -55,33 +56,33 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/editOrAddEmpl")
-    public ModelAndView editOrAddEmpl(@RequestParam(required = false) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
-        ModelAndView modelAndView = new ModelAndView("/empl/create");
+    @ResponseBody
+    public Employee editOrAddEmpl(@RequestParam(required = false) Integer id) throws SQLException {
         Employee employee = new Employee();
         if (id != null) {
-               employee = emplServ.findEmployeeById(id);
+            employee = emplServ.findEmployeeById(id);
         }
-        modelAndView.addObject("employee", employee);
-        modelAndView.addObject("depId", depId);
-        return modelAndView;
+        return employee;
     }
 
 
     @RequestMapping(value = "/employeeSaveOrUpdate", method = RequestMethod.POST)
     @ResponseBody
-    public List<Employee> employeeSaveOrUpdate( @RequestParam("depId") Integer depId, @RequestBody Employee employee) throws SQLException {
-
+    public JsonResponse employeeSaveOrUpdate( @RequestParam("depId") Integer depId, @RequestBody Employee employee) throws SQLException {
+        JsonResponse result = new JsonResponse();
         Department department = depServ.findDepartmentById(depId);
         employee.setDepartment(department);
         try {
             emplServ.saveOrUpdate(employee);
+            result.setStatus("SUCCESS");
+            result.setEmployee(emplServ.findAllEmployee(depId));
         } catch (ValidationException e) {
-          Map<String, String> error = e.getError();
-
-            return emplServ.findAllEmployee(depId);
+            Map<String, String> error = e.getError();
+            result.setError(error);
+            result.setStatus("FAIL");
         }
 
-        return emplServ.findAllEmployee(depId);
+        return result;
     }
 
 }
