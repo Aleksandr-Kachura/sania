@@ -10,11 +10,11 @@ import java.util.Map;
 public class JsonResponse {
     private String status = null;
 
-    private Map<String,String> error = null;
+    private Map<String, String> error = null;
 
-    private List<Department> department =null;
+    private List<Department> department = null;
 
-    private  List<Employee> employee =null;
+    private List<Employee> employee = null;
 
     public List<Department> getDepartment() {
         return department;
@@ -25,8 +25,6 @@ public class JsonResponse {
     }
 
 
-
-
     public String getStatus() {
         return status;
     }
@@ -34,7 +32,6 @@ public class JsonResponse {
     public void setStatus(String status) {
         this.status = status;
     }
-
 
 
     public Map<String, String> getError() {

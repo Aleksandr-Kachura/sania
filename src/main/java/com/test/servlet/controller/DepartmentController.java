@@ -32,8 +32,6 @@ public class DepartmentController {
     @RequestMapping(value = "/DepAll", method = RequestMethod.GET)
     @ResponseBody
     public List<Department> showAll() throws SQLException {
-
-       // modelAndView.addObject("departments", depServ.findAll());
         return depServ.findAll();
     }
 
@@ -41,8 +39,6 @@ public class DepartmentController {
     @RequestMapping(value = "/delDep", method = RequestMethod.POST)
     @ResponseBody
     public List<Department> deleteOne(@RequestParam Integer Id) throws SQLException {
-     /*   String direct = "";
-        direct = "redirect:/page"; */// special char
         Department department;
         department = depServ.findDepartmentById(Id);
         depServ.delete(department);
@@ -53,16 +49,12 @@ public class DepartmentController {
     @RequestMapping(value = "/editOrAddDep")
     @ResponseBody
     public Department editOrAdd(@RequestParam(required = false) Integer id) throws SQLException {
-        //ModelAndView modelAndView = new ModelAndView("/dep/create");
         Department department = null;
         if (id != null) {
             department = depServ.findDepartmentById(id);
-          //  modelAndView.addObject("department", department);
         }
-
         return department;
     }
-
 
 
     @RequestMapping(value = "/depSaveOrUpdate", method = RequestMethod.POST)

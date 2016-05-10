@@ -12,7 +12,6 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -45,7 +44,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/delEmpl")
     @ResponseBody
-    public List<Employee>  deleteOne(@RequestParam(required = true) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
+    public List<Employee> deleteOne(@RequestParam(required = true) Integer id, @RequestParam(required = true) Integer depId) throws SQLException {
         Employee employee = emplServ.findEmployeeById(id);
         emplServ.delete(employee);
         return emplServ.findAllEmployee(depId);
@@ -56,7 +55,7 @@ public class EmployeeController {
     public Employee editOrAddEmpl(@RequestParam(required = false) Integer id) throws SQLException {
         Employee employee = new Employee();
         if (id != null) {
-               employee = emplServ.findEmployeeById(id);
+            employee = emplServ.findEmployeeById(id);
         }
         return employee;
     }

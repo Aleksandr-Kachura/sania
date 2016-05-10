@@ -1,4 +1,3 @@
-
 function Main() {
     this.showHeader = function () {
         console.log("1");
